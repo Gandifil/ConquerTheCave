@@ -1,0 +1,29 @@
+﻿{
+  "exclude": [
+    "obj/",
+    "bin/",
+    ".tiled-*"
+  ],
+  "logSkipped": true,
+  "*references": ["MonoGame.Extended.Content.Pipeline", "MonoGame.Framework.Content.Pipeline"],
+  "overrides": {
+    "musics/*.wav": {
+      "importer": "WavImporter",
+      "processor": "SongProcessor"
+    },
+    "*.tsx": {
+      "importer": "TiledMapTilesetImporter",
+      "processor": "TiledMapTilesetProcessor"
+    },
+    "*.tmx": {
+      "importer": "TiledMapImporter",
+      "processor": "TiledMapProcessor"
+    },
+    ".sf": {
+      "copy": true
+    },
+    ".json": {
+      "copy": true
+    }
+  }
+}
