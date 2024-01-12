@@ -26,7 +26,7 @@ public class Game1 : Game
     {
         Graphics.IsFullScreen = false;
         Graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width - 50;
-        Graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height - 50;
+        Graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height - 100;
         Graphics.ApplyChanges();
 
         Components.Add(ScreenManager = new ScreenManager());

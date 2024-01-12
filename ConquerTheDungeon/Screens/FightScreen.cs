@@ -22,6 +22,6 @@ public class FightScreen: Screen
 
     public override void Draw(GameTime gameTime)
     {
-        Game1.Instance.SpriteBatch.Draw(_background, Vector2.Zero, Color.White);
+        Game1.Instance.SpriteBatch.Draw(_background, new Rectangle(0, 0, Game1.Instance.Graphics.PreferredBackBufferWidth, Game1.Instance.Graphics.PreferredBackBufferHeight), Color.White);
     }
 }
