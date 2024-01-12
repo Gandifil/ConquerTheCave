@@ -1,31 +1,43 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ConquerTheDungeon.Screens;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Screens;
 
 namespace ConquerTheDungeon;
 
 public class Game1 : Game
 {
-    private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
+    public SpriteBatch SpriteBatch { get; private set; }
+    public static Game1 Instance;
+    
+    public ScreenManager ScreenManager { get; private set; }
+    public GraphicsDeviceManager Graphics { get; private set; }
 
     public Game1()
     {
-        _graphics = new GraphicsDeviceManager(this);
+        Instance = this;
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+        Graphics = new GraphicsDeviceManager(this);
     }
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
+        Graphics.IsFullScreen = false;
+        Graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width - 50;
+        Graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height - 50;
+        Graphics.ApplyChanges();
+
+        Components.Add(ScreenManager = new ScreenManager());
+        ScreenManager.LoadScreen(new FightScreen());
 
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
-        _spriteBatch = new SpriteBatch(GraphicsDevice);
+        SpriteBatch = new SpriteBatch(GraphicsDevice);
 
         // TODO: use this.Content to load your game content here
     }
@@ -45,8 +57,8 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        // TODO: Add your drawing code here
-
+        SpriteBatch.Begin();
         base.Draw(gameTime);
+        SpriteBatch.End();
     }
 }

@@ -12,9 +12,8 @@
 
 
 #---------------------------------- Content ---------------------------------#
-
-#begin images/backgrounds/image (13).png
+#begin images/backgrounds/darkest_cave_01.png
 /importer:TextureImporter
 /processor:TextureProcessor
-/build:images/backgrounds/image (13).png
+/build:images/backgrounds/darkest_cave_01.png
 
