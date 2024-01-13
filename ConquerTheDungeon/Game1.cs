@@ -6,6 +6,7 @@ using MLEM.Font;
 using MLEM.Textures;
 using MLEM.Ui;
 using MLEM.Ui.Style;
+using MonoGame.Extended.Input.InputListeners;
 using MonoGame.Extended.Screens;
 
 namespace ConquerTheDungeon;
@@ -17,7 +18,9 @@ public class Game1 : Game
     
     public ScreenManager ScreenManager { get; private set; }
     public GraphicsDeviceManager Graphics { get; private set; }
-    
+
+    public MouseListener Mouse { get; private set; }
+
     public UiSystem UiSystem { get; private set; }
 
     public Game1()
@@ -36,8 +39,9 @@ public class Game1 : Game
         Graphics.ApplyChanges();
         Components.Add(UiSystem = new UiSystem(this, new UiStyle()));
 
+        Components.Add(new InputListenerComponent(this, Mouse = new MouseListener()));
+
         Components.Add(ScreenManager = new ScreenManager());
-        ScreenManager.LoadScreen(new FightScreen());
         
         base.Initialize();
     }
@@ -68,6 +72,7 @@ public class Game1 : Game
         };
         UiSystem.Style = style;
         UiSystem.AutoScaleWithScreen = true;
+        ScreenManager.LoadScreen(new FightScreen());
     }
 
     protected override void Update(GameTime gameTime)
