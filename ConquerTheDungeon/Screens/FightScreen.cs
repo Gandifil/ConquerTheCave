@@ -12,7 +12,7 @@ namespace ConquerTheDungeon.Screens;
 public class FightScreen: Screen
 {
     private Texture2D _background;
-    private CardsPanel _player_board;
+    private CardsPanel _playerBoard;
 
     private readonly Player _player;
 
@@ -27,7 +27,7 @@ public class FightScreen: Screen
 
         
         Game1.Instance.UiSystem.Add("playerDesk", GetPlayerDesk());
-        Game1.Instance.UiSystem.Add("player_board", _player_board = 
+        Game1.Instance.UiSystem.Add("player_board", _playerBoard = 
             new CardsPanel(Anchor.Center, new Vector2(.95f, .33f), Vector2.Zero));
         
         Game1.Instance.Mouse.MouseDragEnd += MouseOnMouseDragEnd;
@@ -47,10 +47,10 @@ public class FightScreen: Screen
         var dragAndDrop = ui.Get(nameof(DragAndDrop));
         if (dragAndDrop is null) return;
 
-        if (_player_board.DisplayArea.Contains(e.Position.ToVector2()))
+        if (_playerBoard.DisplayArea.Contains(e.Position.ToVector2()))
         {
             var cardImage = dragAndDrop.Element as DragAndDrop;
-            _player_board.AddChild(new CardImage(cardImage.Card, Anchor.Center, CardImage.GetSizeFromMlemWidth(0.1f)));
+            _playerBoard.AddChild(new CardImage(cardImage.Card, Anchor.AutoInline, CardImage.GetSizeFromMlemWidth(0.1f)));
         }
     }
 
