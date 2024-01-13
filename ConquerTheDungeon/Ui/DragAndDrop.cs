@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using MLEM.Misc;
 using MLEM.Ui;
 using MonoGame.Extended.Input.InputListeners;
 
@@ -7,10 +8,14 @@ namespace ConquerTheDungeon.Ui;
 
 public class DragAndDrop: CardImage
 {
-    public DragAndDrop(Vector2 size) : base(Anchor.TopLeft, size, false)
+    private readonly Vector2 _clickPoint;
+    
+    public DragAndDrop(Vector2 displayAreaSize, Vector2 clickPoint) : base(Anchor.TopLeft, displayAreaSize, false)
     {
+        _clickPoint = clickPoint;
         Game1.Instance.Mouse.MouseDragEnd += MouseOnMouseDragEnd;
         OnRemovedFromUi += element => { Game1.Instance.Mouse.MouseDragEnd -= MouseOnMouseDragEnd; };
+        SyncWithMouse();
     }
 
     private void MouseOnMouseDragEnd(object sender, MouseEventArgs e)
@@ -23,9 +28,14 @@ public class DragAndDrop: CardImage
 
     public override void Update(GameTime time)
     {
-        var state = Mouse.GetState();
-        PositionOffset = state.Position.ToVector2() ;
-        
+        SyncWithMouse();
+
         base.Update(time);
+    }
+
+    private void SyncWithMouse()
+    {
+        var state = Mouse.GetState();
+        PositionOffset = state.Position.ToVector2() - _clickPoint;
     }
 }

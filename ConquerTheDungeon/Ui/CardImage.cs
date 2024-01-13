@@ -29,7 +29,7 @@ public class CardImage: Image
     {
         if (DisplayArea.Contains(e.Position.ToVector2()))
         {
-            Root.System.Add(nameof(DragAndDrop), new DragAndDrop(DisplayArea.Size));
+            Root.System.Add(nameof(DragAndDrop), new DragAndDrop(DisplayArea.Size, e.Position.ToVector2() - DisplayArea.Location));
         }
     }
     
