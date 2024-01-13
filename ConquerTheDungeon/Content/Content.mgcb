@@ -27,3 +27,13 @@
 /processor:FontDescriptionProcessor
 /build:fonts/gui.spritefont
 
+#begin images/card_frame.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/card_frame.png
+
+#begin images/cards/mage.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/mage.png
+

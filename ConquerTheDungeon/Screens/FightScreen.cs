@@ -15,9 +15,9 @@ public class FightScreen: Screen
     {
         base.Initialize();
 
-        var root = new Panel(Anchor.BottomCenter, new Vector2(.95f, .5f), Vector2.Zero);
+        var root = new Panel(Anchor.BottomCenter, new Vector2(.95f, .33f), Vector2.Zero);
         Game1.Instance.UiSystem.Add("cards", root);
-        root.AddChild(new CardImage(Anchor.Center));
+        root.AddChild(new CardImage(Anchor.Center, new Vector2(0.9f, 0.5f)));
     }
     
     public override void Dispose()
