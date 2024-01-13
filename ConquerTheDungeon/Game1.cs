@@ -1,4 +1,5 @@
-﻿using ConquerTheDungeon.Screens;
+﻿using ConquerTheDungeon.Logic;
+using ConquerTheDungeon.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -72,7 +73,7 @@ public class Game1 : Game
         };
         UiSystem.Style = style;
         UiSystem.AutoScaleWithScreen = true;
-        ScreenManager.LoadScreen(new FightScreen());
+        ScreenManager.LoadScreen(new FightScreen(new Player()));
     }
 
     protected override void Update(GameTime gameTime)

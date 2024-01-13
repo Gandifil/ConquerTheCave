@@ -1,3 +1,4 @@
+using ConquerTheDungeon.Logic;
 using ConquerTheDungeon.Ui;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,18 +14,31 @@ public class FightScreen: Screen
     private Texture2D _background;
     private CardsPanel _player_board;
 
+    private readonly Player _player;
+
+    public FightScreen(Player player)
+    {
+        _player = player;
+    }
+
     public override void Initialize()
     {
         base.Initialize();
 
-        var root = new Panel(Anchor.BottomCenter, new Vector2(.95f, .33f), Vector2.Zero);
-        root.AddChild(new CardImage(Anchor.Center, CardImage.GetSizeFromMlemWidth(0.1f)));
         
-        Game1.Instance.UiSystem.Add("cards", root);
+        Game1.Instance.UiSystem.Add("playerDesk", GetPlayerDesk());
         Game1.Instance.UiSystem.Add("player_board", _player_board = 
             new CardsPanel(Anchor.Center, new Vector2(.95f, .33f), Vector2.Zero));
         
         Game1.Instance.Mouse.MouseDragEnd += MouseOnMouseDragEnd;
+    }
+
+    private Element GetPlayerDesk()
+    {
+        var root = new Panel(Anchor.BottomCenter, new Vector2(.95f, .33f), Vector2.Zero);
+        foreach (var card in _player.Cards)
+            root.AddChild(new CardImage(card, Anchor.AutoInline, CardImage.GetSizeFromMlemWidth(0.1f)));
+        return root;
     }
 
     private void MouseOnMouseDragEnd(object sender, MouseEventArgs e)
@@ -35,7 +49,8 @@ public class FightScreen: Screen
 
         if (_player_board.DisplayArea.Contains(e.Position.ToVector2()))
         {
-            _player_board.AddChild(new CardImage(Anchor.Center, CardImage.GetSizeFromMlemWidth(0.1f)));
+            var cardImage = dragAndDrop.Element as DragAndDrop;
+            _player_board.AddChild(new CardImage(cardImage.Card, Anchor.Center, CardImage.GetSizeFromMlemWidth(0.1f)));
         }
     }
 
