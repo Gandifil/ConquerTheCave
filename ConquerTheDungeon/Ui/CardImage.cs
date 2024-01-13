@@ -27,6 +27,12 @@ public class CardImage: Image
             Game1.Instance.Mouse.MouseDragStart += MouseOnMouseDragStart;
             OnRemovedFromUi += element => { Game1.Instance.Mouse.MouseDragStart -= MouseOnMouseDragStart; };
         }
+
+        AddChild(new Paragraph(Anchor.BottomLeft, 25, paragraph => Card.Life.ToString())
+        {
+            PositionOffset = new Vector2(5, 0)
+        });
+        AddChild(new Paragraph(Anchor.BottomRight, 25, paragraph => Card.Damage.ToString()));
     }
 
     private void MouseOnMouseDragStart(object sender, MouseEventArgs e)
