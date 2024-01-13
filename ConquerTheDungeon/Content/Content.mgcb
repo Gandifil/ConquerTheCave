@@ -17,3 +17,13 @@
 /processor:TextureProcessor
 /build:images/backgrounds/darkest_cave_01.png
 
+#begin images/ui_asset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/ui_asset.png
+
+#begin fonts/gui.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/build:fonts/gui.spritefont
+

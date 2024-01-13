@@ -1,5 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MLEM.Ui;
+using MLEM.Ui.Elements;
 using MonoGame.Extended.Screens;
 
 namespace ConquerTheDungeon.Screens;
@@ -7,6 +9,18 @@ namespace ConquerTheDungeon.Screens;
 public class FightScreen: Screen
 {
     private Texture2D _background;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        Game1.Instance.UiSystem.Add("cards", new Panel(Anchor.BottomCenter, new Vector2(.95f, .5f), Vector2.Zero));
+    }
+    
+    public override void Dispose()
+    {
+        base.Dispose();
+    }
 
     public override void LoadContent()
     {
