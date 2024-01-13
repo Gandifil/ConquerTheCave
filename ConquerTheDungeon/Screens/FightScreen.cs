@@ -1,3 +1,4 @@
+using ConquerTheDungeon.Ui;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Ui;
@@ -14,7 +15,9 @@ public class FightScreen: Screen
     {
         base.Initialize();
 
-        Game1.Instance.UiSystem.Add("cards", new Panel(Anchor.BottomCenter, new Vector2(.95f, .5f), Vector2.Zero));
+        var root = new Panel(Anchor.BottomCenter, new Vector2(.95f, .5f), Vector2.Zero);
+        Game1.Instance.UiSystem.Add("cards", root);
+        root.AddChild(new CardImage(Anchor.Center));
     }
     
     public override void Dispose()
