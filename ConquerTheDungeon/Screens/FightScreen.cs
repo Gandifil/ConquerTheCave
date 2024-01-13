@@ -18,7 +18,7 @@ public class FightScreen: Screen
         base.Initialize();
 
         var root = new Panel(Anchor.BottomCenter, new Vector2(.95f, .33f), Vector2.Zero);
-        root.AddChild(new CardImage(Anchor.Center, new Vector2(0.9f, 0.5f)));
+        root.AddChild(new CardImage(Anchor.Center, CardImage.GetSizeFromMlemWidth(0.1f)));
         
         Game1.Instance.UiSystem.Add("cards", root);
         Game1.Instance.UiSystem.Add("player_board", _player_board = 
@@ -35,7 +35,7 @@ public class FightScreen: Screen
 
         if (_player_board.DisplayArea.Contains(e.Position.ToVector2()))
         {
-            _player_board.AddChild(new CardImage(Anchor.Center, new Vector2(0.9f, 0.5f)));
+            _player_board.AddChild(new CardImage(Anchor.Center, new Vector2(0.5f, 0.5f)));
         }
     }
 
@@ -55,7 +55,6 @@ public class FightScreen: Screen
 
     public override void Update(GameTime gameTime)
     {
-        //throw new System.NotImplementedException();
     }
 
     public override void Draw(GameTime gameTime)

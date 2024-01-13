@@ -7,7 +7,7 @@ namespace ConquerTheDungeon.Ui;
 
 public class DragAndDrop: CardImage
 {
-    public DragAndDrop(Anchor anchor, Vector2 size) : base(anchor, size, false)
+    public DragAndDrop(Vector2 size) : base(Anchor.TopLeft, size, false)
     {
         Game1.Instance.Mouse.MouseDragEnd += MouseOnMouseDragEnd;
         OnRemovedFromUi += element => { Game1.Instance.Mouse.MouseDragEnd -= MouseOnMouseDragEnd; };
@@ -23,9 +23,9 @@ public class DragAndDrop: CardImage
 
     public override void Update(GameTime time)
     {
-        base.Update(time);
-            
         var state = Mouse.GetState();
-        PositionOffset = state.Position.ToVector2();
+        PositionOffset = state.Position.ToVector2() ;
+        
+        base.Update(time);
     }
 }
