@@ -37,3 +37,14 @@
 /processor:TextureProcessor
 /build:images/cards/mage.png
 
+#begin cards/mage.json
+/copy:cards/mage.json
+
+#begin cards/warrior.json
+/copy:cards/warrior.json
+
+#begin images/cards/warrior.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/warrior.png
+
