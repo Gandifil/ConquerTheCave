@@ -35,7 +35,7 @@ public class FightScreen: Screen
 
         if (_player_board.DisplayArea.Contains(e.Position.ToVector2()))
         {
-            _player_board.AddChild(new CardImage(Anchor.Center, new Vector2(0.5f, 0.5f)));
+            _player_board.AddChild(new CardImage(Anchor.Center, CardImage.GetSizeFromMlemWidth(0.1f)));
         }
     }
 
