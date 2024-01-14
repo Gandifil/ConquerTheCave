@@ -64,3 +64,8 @@
 /processor:TextureProcessor
 /build:images/cards/armor.png
 
+#begin images/creature_card_frame.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/creature_card_frame.png
+
