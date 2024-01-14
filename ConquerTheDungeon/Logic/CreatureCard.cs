@@ -1,15 +1,12 @@
 namespace ConquerTheDungeon.Logic;
 
-public class CreatureCard
+public class CreatureCard : Card
 {
-    public readonly CardContent Content;
-
     public int Life => Content.Life;
 
     public int Damage => Content.Damage;
     
-    public CreatureCard(CardContent content)
+    public CreatureCard(CardContent content) : base(content)
     {
-        Content = content;
     }
 }
