@@ -50,7 +50,7 @@ public class FightScreen: Screen
         if (_playerBoard.DisplayArea.Contains(e.Position.ToVector2()))
         {
             var cardImage = dragAndDrop.Element as DragAndDrop;
-            _playerBoard.AddChild(new CardImage(cardImage.Card, Anchor.AutoInline, CardImage.GetSizeFromMlemWidth(0.1f)));
+            _playerBoard.Add(cardImage.Card);
         }
     }
 

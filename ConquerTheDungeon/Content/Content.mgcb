@@ -48,3 +48,11 @@
 /processor:TextureProcessor
 /build:images/cards/warrior.png
 
+#begin cards/tarrask.json
+/copy:cards/tarrask.json
+
+#begin images/cards/tarrask.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/tarrask.png
+
