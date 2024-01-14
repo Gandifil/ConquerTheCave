@@ -69,3 +69,8 @@
 /processor:TextureProcessor
 /build:images/creature_card_frame.png
 
+#begin images/card_frame_moused.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/card_frame_moused.png
+
