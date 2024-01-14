@@ -56,3 +56,11 @@
 /processor:TextureProcessor
 /build:images/cards/tarrask.png
 
+#begin cards/armor.json
+/copy:cards/armor.json
+
+#begin images/cards/armor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/armor.png
+

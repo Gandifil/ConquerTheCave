@@ -14,10 +14,10 @@ public class CardImage: Image
 {
     public static Size2 Size = new Size2(350, 500);
 
-    public readonly CreatureCard Card;
+    public readonly Card Card;
     private readonly Texture2D _frame;
     
-    public CardImage(CreatureCard card, Anchor anchor, Vector2 size, bool canMove = true): base(anchor, size, getTextureRegion(card.Content.Texture))
+    public CardImage(Card card, Anchor anchor, Vector2 size, bool canMove = true): base(anchor, size, getTextureRegion(card.Content.Texture))
     {
         Card = card;
         _frame = Game1.Instance.Content.Load<Texture2D>("images/card_frame");
@@ -28,11 +28,14 @@ public class CardImage: Image
             OnRemovedFromUi += element => { Game1.Instance.Mouse.MouseDragStart -= MouseOnMouseDragStart; };
         }
 
-        AddChild(new Paragraph(Anchor.BottomLeft, 25, paragraph => Card.Life.ToString())
+        if (Card is CreatureCard creatureCard)
         {
-            PositionOffset = new Vector2(5, 0)
-        });
-        AddChild(new Paragraph(Anchor.BottomRight, 25, paragraph => Card.Damage.ToString()));
+            AddChild(new Paragraph(Anchor.BottomLeft, 25, paragraph => creatureCard.Life.ToString())
+            {
+                PositionOffset = new Vector2(5, 0)
+            });
+            AddChild(new Paragraph(Anchor.BottomRight, 25, paragraph => creatureCard.Damage.ToString()));    
+        }
     }
 
     private void MouseOnMouseDragStart(object sender, MouseEventArgs e)

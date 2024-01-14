@@ -1,4 +1,5 @@
 {
+  "Type": "CreatureCard",
   "Texture": "mage",
   "Life": 10,
   "Damage": 10

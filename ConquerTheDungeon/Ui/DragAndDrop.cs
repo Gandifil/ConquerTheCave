@@ -1,7 +1,6 @@
 using ConquerTheDungeon.Logic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MLEM.Misc;
 using MLEM.Ui;
 using MonoGame.Extended.Input.InputListeners;
 
@@ -11,7 +10,7 @@ public class DragAndDrop: CardImage
 {
     private readonly Vector2 _clickPoint;
     
-    public DragAndDrop(CreatureCard card, Vector2 displayAreaSize, Vector2 clickPoint) : base(card, Anchor.TopLeft, displayAreaSize, false)
+    public DragAndDrop(Card card, Vector2 displayAreaSize, Vector2 clickPoint) : base(card, Anchor.TopLeft, displayAreaSize, false)
     {
         _clickPoint = clickPoint;
         Game1.Instance.Mouse.MouseDragEnd += MouseOnMouseDragEnd;
