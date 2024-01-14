@@ -37,7 +37,10 @@ public class FightScreen: Screen
     {
         var root = new Panel(Anchor.BottomCenter, new Vector2(.95f, .33f), Vector2.Zero);
         foreach (var card in _player.Cards)
-            root.AddChild(new CardImage(card, Anchor.AutoInline, CardImage.GetSizeFromMlemWidth(0.1f)));
+            root.AddChild(new CardImage(card, Anchor.AutoInline, new Vector2(0.05f, 0f))
+            {
+                SetHeightBasedOnAspect = true
+            });
         return root;
     }
 
