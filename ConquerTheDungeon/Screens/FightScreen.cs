@@ -16,10 +16,12 @@ public class FightScreen: Screen
     private CardsPanel _enemyBoard;
 
     private readonly Player _player;
+    private readonly GameProcess _gameProcess;
 
     public FightScreen(Player player)
     {
         _player = player;
+        _gameProcess = new GameProcess(player);
     }
 
     public override void Initialize()
@@ -28,14 +30,14 @@ public class FightScreen: Screen
 
         
         Game1.Instance.UiSystem.Add("enemy_board", _enemyBoard = 
-            new CardsPanel(Anchor.TopCenter, new Vector2(1, .4f)));
-        foreach (var card in new FightScenario().GetInitialCards())
-            _enemyBoard.Add(card);
+            new CardsPanel(_gameProcess.EnemyBoard, Anchor.TopCenter, new Vector2(1, .4f)));
         Game1.Instance.UiSystem.Add("player_board", _playerBoard = 
-            new CardsPanel(Anchor.Center, new Vector2(1, .4f)));
+            new CardsPanel(_gameProcess.PlayerBoard, Anchor.Center, new Vector2(1, .4f)));
         Game1.Instance.UiSystem.Add("playerDesk", GetPlayerDesk());
         
         Game1.Instance.Mouse.MouseDragEnd += MouseOnMouseDragEnd;
+
+        _gameProcess.Initialization();
     }
 
     private Element GetPlayerDesk()
@@ -77,7 +79,7 @@ public class FightScreen: Screen
             switch (cardImage.Card)
             {
                 case CreatureCard:
-                    _playerBoard.Add(cardImage.Card as CreatureCard);
+                    _gameProcess.PlayerBoard.Creatures.Add(cardImage.Card as CreatureCard);
                     break;
                 case ModCard:
                     foreach (var element in _playerBoard.GetChildren())

@@ -8,11 +8,12 @@ namespace ConquerTheDungeon.Ui;
 
 public class CardsPanel: Group
 {
-    public CardsPanel(Anchor anchor, Vector2 size) : base(anchor, size, false)
+    public CardsPanel(Board board, Anchor anchor, Vector2 size) : base(anchor, size, false)
     {
+        board.Creatures.ItemAdded += (sender, args) => Add(args.Item);
     }
 
-    public void Add(CreatureCard card)
+    private void Add(CreatureCard card)
     {
         AddCardImage(card.Clone());
         AddChild(new Group(Anchor.AutoInline, new Vector2(10, 10)));
