@@ -6,16 +6,29 @@ using MLEM.Ui.Style;
 
 namespace ConquerTheDungeon.Ui;
 
-public class CardsPanel: Panel
+public class CardsPanel: Group
 {
-    public CardsPanel(Anchor anchor, Vector2 size, Vector2 positionOffset, bool setHeightBasedOnChildren = false, bool scrollOverflow = false, bool autoHideScrollbar = true) : base(anchor, size, positionOffset, setHeightBasedOnChildren, scrollOverflow, autoHideScrollbar)
+    public CardsPanel(Anchor anchor, Vector2 size) : base(anchor, size, false)
     {
-        Style = new StyleProp<UiStyle>();
     }
 
     public void Add(CreatureCard card)
     {
-        AddChild(new CardImage(card, Anchor.AutoInline, CardImage.GetSizeFromMlemWidth(0.1f)));
+        AddCardImage(card);
         AddChild(new Group(Anchor.AutoInline, new Vector2(10, 10)));
+    }
+
+    private void AddCardImage(CreatureCard card)
+    {
+        var cardImage = new CardImage(card, Anchor.AutoInline, CardImage.GetSizeFromMlemWidth(0.1f));
+        card.OnModAdded += (sender, modCard) =>
+        {
+            cardImage.AddChild(new CardImage(modCard, Anchor.Center, new Vector2(0.3f, 0f))
+            {
+                SetHeightBasedOnAspect = true,
+                PositionOffset = new Vector2(0, 100f),
+            });
+        };
+        AddChild(cardImage);
     }
 }

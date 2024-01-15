@@ -28,7 +28,7 @@ public class FightScreen: Screen
         
         Game1.Instance.UiSystem.Add("playerDesk", GetPlayerDesk());
         Game1.Instance.UiSystem.Add("player_board", _playerBoard = 
-            new CardsPanel(Anchor.Center, new Vector2(.95f, .33f), Vector2.Zero));
+            new CardsPanel(Anchor.Center, new Vector2(.95f, .33f)));
         
         Game1.Instance.Mouse.MouseDragEnd += MouseOnMouseDragEnd;
     }
@@ -69,8 +69,22 @@ public class FightScreen: Screen
 
         if (_playerBoard.DisplayArea.Contains(e.Position.ToVector2()))
         {
-            if (cardImage.Card is CreatureCard creatureCard)
-                _playerBoard.Add(creatureCard);
+            switch (cardImage.Card)
+            {
+                case CreatureCard:
+                    _playerBoard.Add(cardImage.Card as CreatureCard);
+                    break;
+                case ModCard:
+                    foreach (var element in _playerBoard.GetChildren())
+                        if (element.IsMouseOver)
+                            if (element is CardImage elementCardImage)
+                            {
+                                var creature = elementCardImage.Card as CreatureCard;
+                                creature.Add(cardImage.Card as ModCard);
+                            }
+                break;
+                
+            }
         }
         
         if (cardImage.Card is ModCard)
