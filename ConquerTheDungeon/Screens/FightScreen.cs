@@ -55,20 +55,27 @@ public class FightScreen: Screen
         Game1.Instance.UiSystem.Add(nameof(DragAndDrop), new DragAndDrop(cardImage.Card, 
             cardImage.DisplayArea.Size, 
             e.Position.ToVector2() - cardImage.DisplayArea.Location));
+        if (cardImage.Card is ModCard)
+            foreach (var element in _playerBoard.GetChildren())
+                element.CanBeMoused = true;
     }
 
     private void MouseOnMouseDragEnd(object sender, MouseEventArgs e)
     {
         var ui = Game1.Instance.UiSystem;
-        var dragAndDrop = ui.Get(nameof(DragAndDrop));
-        if (dragAndDrop is null) return;
+        var root = ui.Get(nameof(DragAndDrop));
+        if (root is null) return;
+        var cardImage = root.Element as DragAndDrop;
 
         if (_playerBoard.DisplayArea.Contains(e.Position.ToVector2()))
         {
-            var cardImage = dragAndDrop.Element as DragAndDrop;
             if (cardImage.Card is CreatureCard creatureCard)
                 _playerBoard.Add(creatureCard);
         }
+        
+        if (cardImage.Card is ModCard)
+            foreach (var element in _playerBoard.GetChildren())
+                element.CanBeMoused = false;
     }
 
     public override void Dispose()
