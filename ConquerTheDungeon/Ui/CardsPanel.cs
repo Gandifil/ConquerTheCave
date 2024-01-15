@@ -14,7 +14,7 @@ public class CardsPanel: Group
 
     public void Add(CreatureCard card)
     {
-        AddCardImage(card);
+        AddCardImage(card.Clone());
         AddChild(new Group(Anchor.AutoInline, new Vector2(10, 10)));
     }
 

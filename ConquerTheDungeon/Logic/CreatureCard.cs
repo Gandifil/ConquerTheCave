@@ -13,7 +13,7 @@ public class CreatureCard : Card
     public event EventHandler<ModCard> OnModAdded;
 
     public IReadOnlyList<ModCard> Mods => _mods;
-    
+
     public CreatureCard(CardContent content) : base(content)
     {
     }
@@ -23,4 +23,10 @@ public class CreatureCard : Card
         _mods.Add(mod);
         OnModAdded?.Invoke(this, mod);
     }
+
+    public CreatureCard Clone()
+    {
+        return new CreatureCard(Content);
+    }
+
 }
