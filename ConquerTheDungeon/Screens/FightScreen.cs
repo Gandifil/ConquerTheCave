@@ -53,7 +53,8 @@ public class FightScreen: Screen
         if (_playerBoard.DisplayArea.Contains(e.Position.ToVector2()))
         {
             var cardImage = dragAndDrop.Element as DragAndDrop;
-            _playerBoard.Add(cardImage.Card);
+            if (cardImage.Card is CreatureCard creatureCard)
+                _playerBoard.Add(creatureCard);
         }
     }
 

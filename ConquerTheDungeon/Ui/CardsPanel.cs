@@ -13,7 +13,7 @@ public class CardsPanel: Panel
         Style = new StyleProp<UiStyle>();
     }
 
-    public void Add(Card card)
+    public void Add(CreatureCard card)
     {
         AddChild(new CardImage(card, Anchor.AutoInline, CardImage.GetSizeFromMlemWidth(0.1f)));
         AddChild(new Group(Anchor.AutoInline, new Vector2(10, 10)));
