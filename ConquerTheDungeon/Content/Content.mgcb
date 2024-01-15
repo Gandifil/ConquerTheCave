@@ -74,3 +74,11 @@
 /processor:TextureProcessor
 /build:images/card_frame_moused.png
 
+#begin cards/dog01.json
+/copy:cards/dog01.json
+
+#begin images/cards/dog01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/dog01.png
+

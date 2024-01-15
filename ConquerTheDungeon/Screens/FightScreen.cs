@@ -13,6 +13,7 @@ public class FightScreen: Screen
 {
     private Texture2D _background;
     private CardsPanel _playerBoard;
+    private CardsPanel _enemyBoard;
 
     private readonly Player _player;
 
@@ -26,16 +27,20 @@ public class FightScreen: Screen
         base.Initialize();
 
         
-        Game1.Instance.UiSystem.Add("playerDesk", GetPlayerDesk());
+        Game1.Instance.UiSystem.Add("enemy_board", _enemyBoard = 
+            new CardsPanel(Anchor.TopCenter, new Vector2(1, .4f)));
+        foreach (var card in new FightScenario().GetInitialCards())
+            _enemyBoard.Add(card);
         Game1.Instance.UiSystem.Add("player_board", _playerBoard = 
-            new CardsPanel(Anchor.Center, new Vector2(.95f, .33f)));
+            new CardsPanel(Anchor.Center, new Vector2(1, .4f)));
+        Game1.Instance.UiSystem.Add("playerDesk", GetPlayerDesk());
         
         Game1.Instance.Mouse.MouseDragEnd += MouseOnMouseDragEnd;
     }
 
     private Element GetPlayerDesk()
     {
-        var root = new Panel(Anchor.BottomCenter, new Vector2(.95f, .33f), Vector2.Zero);
+        var root = new Panel(Anchor.BottomCenter, new Vector2(.95f, .2f), Vector2.Zero);
         foreach (var card in _player.Cards)
         {
             var cardImage = new CardImage(card, Anchor.AutoInline, new Vector2(0.05f, 0f), true)
