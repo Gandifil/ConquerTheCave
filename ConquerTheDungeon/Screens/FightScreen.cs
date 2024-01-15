@@ -79,7 +79,7 @@ public class FightScreen: Screen
             switch (cardImage.Card)
             {
                 case CreatureCard:
-                    _gameProcess.PlayerBoard.Creatures.Add(cardImage.Card as CreatureCard);
+                    _gameProcess.PlayerBoard.Creatures.Add((cardImage.Card as CreatureCard).Clone());
                     break;
                 case ModCard:
                     foreach (var element in _playerBoard.GetChildren())
