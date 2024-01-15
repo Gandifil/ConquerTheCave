@@ -1,0 +1,6 @@
+{
+  "Type": "CreatureCard",
+  "Texture": "dog01",
+  "Life": 5,
+  "Damage": 1
+}
