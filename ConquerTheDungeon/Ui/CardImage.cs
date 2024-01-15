@@ -14,11 +14,13 @@ public class CardImage: Image
 {
     public static Size2 Size = new Size2(350, 500);
 
+    public event EventHandler<MouseEventArgs> OnMouseDrag; 
+
     public readonly Card Card;
     private readonly Texture2D _frame;
     private readonly Image _highlight;
     
-    public CardImage(Card card, Anchor anchor, Vector2 size, bool canMove = true): base(anchor, size, getTextureRegion(card.Content.Texture))
+    public CardImage(Card card, Anchor anchor, Vector2 size, bool canMove = false): base(anchor, size, getTextureRegion(card.Content.Texture))
     {
         Card = card;
         _frame = Game1.Instance.Content.Load<Texture2D>("images/" + (Card is CreatureCard ? "creature_card_frame" : "card_frame") );
@@ -41,7 +43,6 @@ public class CardImage: Image
         var highlightFrame = Game1.Instance.Content.Load<Texture2D>("images/card_frame_moused");
         AddChild(_highlight = new Image(Anchor.Center, new Vector2(1f, 1f), new TextureRegion(highlightFrame)));
         _highlight.IsHidden = true;
-        CanBeMoused = true;
         OnMouseEnter = element => _highlight.IsHidden = false;
         OnMouseExit = element => _highlight.IsHidden = true;
     }
@@ -50,7 +51,7 @@ public class CardImage: Image
     {
         if (DisplayArea.Contains(e.Position.ToVector2()))
         {
-            Root.System.Add(nameof(DragAndDrop), new DragAndDrop(Card, DisplayArea.Size, e.Position.ToVector2() - DisplayArea.Location));
+            OnMouseDrag?.Invoke(this, e);
         }
     }
     

@@ -37,11 +37,24 @@ public class FightScreen: Screen
     {
         var root = new Panel(Anchor.BottomCenter, new Vector2(.95f, .33f), Vector2.Zero);
         foreach (var card in _player.Cards)
-            root.AddChild(new CardImage(card, Anchor.AutoInline, new Vector2(0.05f, 0f))
+        {
+            var cardImage = new CardImage(card, Anchor.AutoInline, new Vector2(0.05f, 0f), true)
             {
                 SetHeightBasedOnAspect = true
-            });
+            };
+            cardImage.OnMouseDrag += CardOnMouseDrag;
+            root.AddChild(cardImage);
+        }
+        
         return root;
+    }
+
+    private void CardOnMouseDrag(object sender, MouseEventArgs e)
+    {
+        var cardImage = sender as CardImage;
+        Game1.Instance.UiSystem.Add(nameof(DragAndDrop), new DragAndDrop(cardImage.Card, 
+            cardImage.DisplayArea.Size, 
+            e.Position.ToVector2() - cardImage.DisplayArea.Location));
     }
 
     private void MouseOnMouseDragEnd(object sender, MouseEventArgs e)
