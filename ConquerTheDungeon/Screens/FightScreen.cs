@@ -34,6 +34,9 @@ public class FightScreen: Screen
         Game1.Instance.UiSystem.Add("player_board", _playerBoard = 
             new CardsPanel(_gameProcess.PlayerBoard, Anchor.Center, new Vector2(1, .4f)));
         Game1.Instance.UiSystem.Add("playerDesk", GetPlayerDesk());
+        var turnButton = new Button(Anchor.BottomRight, new Vector2(0.1f, 0.1f), "Turn");
+        turnButton.OnPressed = element => _gameProcess.Turn();
+        Game1.Instance.UiSystem.Add("button", turnButton);
         
         Game1.Instance.Mouse.MouseDragEnd += MouseOnMouseDragEnd;
 
