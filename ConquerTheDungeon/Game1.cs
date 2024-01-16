@@ -1,4 +1,5 @@
-﻿using ConquerTheDungeon.Logic;
+﻿using ConquerTheDungeon.Animations;
+using ConquerTheDungeon.Logic;
 using ConquerTheDungeon.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,6 +10,7 @@ using MLEM.Ui;
 using MLEM.Ui.Style;
 using MonoGame.Extended.Input.InputListeners;
 using MonoGame.Extended.Screens;
+using MonoGame.Extended.Sprites;
 
 namespace ConquerTheDungeon;
 
@@ -23,6 +25,8 @@ public class Game1 : Game
     public MouseListener Mouse { get; private set; }
 
     public UiSystem UiSystem { get; private set; }
+
+    public AnimationManager Animations { get; private set; }
 
     public Game1()
     {
@@ -43,6 +47,8 @@ public class Game1 : Game
         Components.Add(new InputListenerComponent(this, Mouse = new MouseListener()));
 
         Components.Add(ScreenManager = new ScreenManager());
+
+        Components.Add(Animations = new AnimationManager());
         
         base.Initialize();
     }

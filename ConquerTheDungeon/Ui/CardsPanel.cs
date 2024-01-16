@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
+using MonoGame.Extended.Tweening;
 
 namespace ConquerTheDungeon.Ui;
 
