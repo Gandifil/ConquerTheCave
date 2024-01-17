@@ -1,3 +1,5 @@
+using ConquerTheDungeon.Logic.Cards.Spells;
+
 namespace ConquerTheDungeon.Logic.Cards;
 
 public class CardContent
@@ -9,4 +11,8 @@ public class CardContent
     public int Damage { get; set; }
 
     public int  Life { get; set; }
+    
+    public TargetKind TargetKind { get; set; }
+    
+    public TargetSide TargetSide { get; set; }
 }
