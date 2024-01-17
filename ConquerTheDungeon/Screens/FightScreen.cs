@@ -1,4 +1,5 @@
 using ConquerTheDungeon.Logic;
+using ConquerTheDungeon.Logic.Cards;
 using ConquerTheDungeon.Ui;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

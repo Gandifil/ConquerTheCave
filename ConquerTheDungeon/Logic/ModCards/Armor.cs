@@ -1,3 +1,5 @@
+using ConquerTheDungeon.Logic.Cards;
+
 namespace ConquerTheDungeon.Logic.ModCards;
 
 public class Armor: ModCard

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ConquerTheDungeon.Logic;
+using ConquerTheDungeon.Logic.Cards;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;

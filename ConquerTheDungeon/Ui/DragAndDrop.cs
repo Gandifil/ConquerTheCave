@@ -1,4 +1,5 @@
 using ConquerTheDungeon.Logic;
+using ConquerTheDungeon.Logic.Cards;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MLEM.Ui;

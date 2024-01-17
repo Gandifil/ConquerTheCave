@@ -1,6 +1,6 @@
 using MLEM.Ui.Elements;
 
-namespace ConquerTheDungeon.Logic;
+namespace ConquerTheDungeon.Logic.Cards;
 
 public class Card
 {

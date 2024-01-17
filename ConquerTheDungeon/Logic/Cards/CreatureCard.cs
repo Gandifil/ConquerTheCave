@@ -4,7 +4,7 @@ using ConquerTheDungeon.Animations;
 using MLEM.Extensions;
 using MonoGame.Extended.Collections;
 
-namespace ConquerTheDungeon.Logic;
+namespace ConquerTheDungeon.Logic.Cards;
 
 public class CreatureCard : Card
 {

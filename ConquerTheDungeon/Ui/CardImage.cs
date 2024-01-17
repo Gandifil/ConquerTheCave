@@ -1,5 +1,6 @@
 using System;
 using ConquerTheDungeon.Logic;
+using ConquerTheDungeon.Logic.Cards;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Textures;

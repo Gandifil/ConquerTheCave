@@ -1,3 +1,4 @@
+using ConquerTheDungeon.Logic.Cards;
 using MonoGame.Extended.Collections;
 
 namespace ConquerTheDungeon.Logic;

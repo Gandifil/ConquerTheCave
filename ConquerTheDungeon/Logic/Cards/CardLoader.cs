@@ -3,7 +3,7 @@ using System.Linq;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 
-namespace ConquerTheDungeon.Logic;
+namespace ConquerTheDungeon.Logic.Cards;
 
 public static class CardLoader
 {

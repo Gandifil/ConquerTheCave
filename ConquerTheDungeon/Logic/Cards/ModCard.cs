@@ -1,4 +1,4 @@
-namespace ConquerTheDungeon.Logic;
+namespace ConquerTheDungeon.Logic.Cards;
 
 public class ModCard: Card
 {

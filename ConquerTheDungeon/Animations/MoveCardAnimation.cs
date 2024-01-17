@@ -1,4 +1,5 @@
 using ConquerTheDungeon.Logic;
+using ConquerTheDungeon.Logic.Cards;
 using ConquerTheDungeon.Ui;
 
 namespace ConquerTheDungeon.Animations;
