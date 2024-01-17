@@ -22,7 +22,10 @@ public class CardsPanel: Group
 
     private void AddCardImage(CreatureCard card)
     {
-        var cardImage = new CardImage(card, Anchor.AutoInline, CardImage.GetSizeFromMlemWidth(0.1f));
+        var cardImage = new CardImage(card, Anchor.AutoInline, new Vector2(1f, 1f))
+        {
+            SetHeightBasedOnAspect = true,
+        };
         card.OnModAdded += (sender, modCard) =>
         {
             cardImage.AddChild(new CardImage(modCard, Anchor.Center, new Vector2(0.3f, 0f))
@@ -31,6 +34,8 @@ public class CardsPanel: Group
                 PositionOffset = new Vector2(0, 100f),
             });
         };
-        AddChild(cardImage);
+        var group = new Group(Anchor.AutoInline, new Vector2(.1f, 0));
+        group.AddChild(cardImage);
+        AddChild(group);
     }
 }

@@ -36,7 +36,7 @@ public class CreatureCard : Card
     public void Turn(ObservableCollection<CreatureCard> ownBoard, ObservableCollection<CreatureCard> againstBoard)
     {
         var creature = Random.Shared.GetRandomEntry(againstBoard);
-        var animation = new MoveCardAnimation(this, creature);
+        var animation = new StrikeCardAnimation(this, creature);
         animation.Finished += x => creature.Hurt(Damage);
         Game1.Instance.Animations.Add(animation);
     }
