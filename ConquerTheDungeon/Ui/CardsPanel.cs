@@ -1,14 +1,14 @@
+using System.Collections.Generic;
 using ConquerTheDungeon.Logic;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
-using MLEM.Ui.Style;
-using MonoGame.Extended.Tweening;
 
 namespace ConquerTheDungeon.Ui;
 
 public class CardsPanel: Group
 {
+    private readonly Dictionary<CreatureCard, Group> _groups = new();
     public CardsPanel(Board board, Anchor anchor, Vector2 size) : base(anchor, size, false)
     {
         board.Creatures.ItemAdded += (sender, args) => Add(args.Item);
@@ -37,5 +37,12 @@ public class CardsPanel: Group
         var group = new Group(Anchor.AutoInline, new Vector2(.1f, 0));
         group.AddChild(cardImage);
         AddChild(group);
+        _groups[card] = group;
+        card.Died += CardOnDied;
+    }
+
+    private void CardOnDied(CreatureCard obj)
+    {
+        RemoveChild(_groups[obj]);
     }
 }

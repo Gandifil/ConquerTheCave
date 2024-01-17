@@ -43,6 +43,15 @@ public class CreatureCard : Card
 
     public void Hurt(int value)
     {
-        Life -= value;
+        Life = Math.Max(0, Life - value);
+        if (Life == 0)
+            Die();
+    }
+
+    public event Action<CreatureCard> Died;
+
+    private void Die()
+    {
+        Died?.Invoke(this);
     }
 }
