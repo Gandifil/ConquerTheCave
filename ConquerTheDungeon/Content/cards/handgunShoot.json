@@ -1,0 +1,6 @@
+{
+  "Type": "HandgunShoot",
+  "Texture": "handgun01",
+  "TargetSide": "Enemy",
+  "TargetKind": "OneCard"
+}

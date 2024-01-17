@@ -82,3 +82,11 @@
 /processor:TextureProcessor
 /build:images/cards/dog01.png
 
+#begin cards/handgunShoot.json
+/copy:cards/handgunShoot.json
+
+#begin images/cards/handgun01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/handgun01.png
+
