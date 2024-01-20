@@ -1,5 +1,8 @@
+using System;
+using System.Diagnostics;
 using ConquerTheDungeon.Logic;
 using ConquerTheDungeon.Logic.Cards;
+using ConquerTheDungeon.Logic.Cards.Spells;
 using ConquerTheDungeon.Ui;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -67,8 +70,25 @@ public class FightScreen: Screen
             cardImage.DisplayArea.Size, 
             e.Position.ToVector2() - cardImage.DisplayArea.Location));
         if (cardImage.Card is ModCard)
-            foreach (var element in _playerBoard.GetChildren())
-                element.CanBeMoused = true;
+            _playerBoard.CardsCanBeMoused = true;
+        if (cardImage.Card is SpellCard spellCard)
+        {
+            if (spellCard.TargetKind == TargetKind.OneCard)
+            {
+                var board = GetBoard(spellCard);
+                board.CardsCanBeMoused = true;
+            }
+        }
+    }
+
+    private CardsPanel GetBoard(SpellCard spellCard)
+    {
+        return spellCard.TargetSide switch
+        {
+            TargetSide.Player => _playerBoard,
+            TargetSide.Enemy => _enemyBoard,
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 
     private void MouseOnMouseDragEnd(object sender, MouseEventArgs e)
@@ -78,29 +98,33 @@ public class FightScreen: Screen
         if (root is null) return;
         var cardImage = root.Element as DragAndDrop;
 
-        if (_playerBoard.DisplayArea.Contains(e.Position.ToVector2()))
+        switch (cardImage.Card)
         {
-            switch (cardImage.Card)
-            {
-                case CreatureCard:
-                    _gameProcess.PlayerBoard.Creatures.Add((cardImage.Card as CreatureCard).Clone());
-                    break;
-                case ModCard:
+            case CreatureCard c:
+                if (_playerBoard.DisplayArea.Contains(e.Position.ToVector2()))
+                    _gameProcess.PlayerBoard.Creatures.Add(c.Clone());
+                break;
+            case ModCard m:
+                if (_playerBoard.DisplayArea.Contains(e.Position.ToVector2()))
                     foreach (var element in _playerBoard.GetChildren())
                         if (element.IsMouseOver)
                             if (element is CardImage elementCardImage)
                             {
                                 var creature = elementCardImage.Card as CreatureCard;
-                                creature.Add(cardImage.Card as ModCard);
+                                creature.Add(m);
                             }
                 break;
-                
-            }
+            
+            case SpellCard spellCard:
+                foreach (var element in GetBoard(spellCard).GetChildren())
+                    if (element.IsMouseOver)
+                        if (element is CardImage elementCardImage)
+                            spellCard.Use(elementCardImage.Card as CreatureCard);
+                break;
         }
         
-        if (cardImage.Card is ModCard)
-            foreach (var element in _playerBoard.GetChildren())
-                element.CanBeMoused = false;
+        _playerBoard.CardsCanBeMoused = false;
+        _enemyBoard.CardsCanBeMoused = false;
     }
 
     public override void Dispose()

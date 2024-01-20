@@ -15,6 +15,15 @@ public class CardsPanel: Group
         board.Creatures.ItemAdded += (sender, args) => Add(args.Item);
     }
 
+    public bool CardsCanBeMoused
+    {
+        set
+        {
+            foreach (var creatureCard in _groups.Keys)
+                creatureCard.UiElement.CanBeMoused = value;
+        }
+    }
+
     private void Add(CreatureCard card)
     {
         AddCardImage(card);
