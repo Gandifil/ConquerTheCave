@@ -13,6 +13,7 @@ public class CardsPanel: Group
     public CardsPanel(Board board, Anchor anchor, Vector2 size) : base(anchor, size, false)
     {
         board.Creatures.ItemAdded += (sender, args) => Add(args.Item);
+        board.Creatures.ItemRemoved += (sender, args) => CardOnDied(args.Item);
     }
 
     public bool CardsCanBeMoused
