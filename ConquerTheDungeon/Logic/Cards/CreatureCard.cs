@@ -44,11 +44,13 @@ public class CreatureCard : Card
     public void Hurt(int value)
     {
         Life = Math.Max(0, Life - value);
+        Damaged?.Invoke();
         if (Life == 0)
             Die();
     }
 
     public event Action<CreatureCard> Died;
+    public event Action Damaged;
 
     private void Die()
     {

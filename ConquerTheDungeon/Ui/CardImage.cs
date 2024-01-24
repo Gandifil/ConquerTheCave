@@ -1,4 +1,5 @@
 using System;
+using ConquerTheDungeon.Animations;
 using ConquerTheDungeon.Logic;
 using ConquerTheDungeon.Logic.Cards;
 using Microsoft.Xna.Framework;
@@ -6,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MLEM.Textures;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
+using MLEM.Ui.Style;
 using MonoGame.Extended;
 using MonoGame.Extended.Input.InputListeners;
 
@@ -20,6 +22,15 @@ public class CardImage: Image
     public readonly Card Card;
     private readonly Texture2D _frame;
     private readonly Image _highlight;
+
+    public Color ColorProp
+    {
+        get => Color.Value;
+        set
+        {
+            Color = new StyleProp<Color>(value);
+        }
+    }
     
     public CardImage(Card card, Anchor anchor, Vector2 size, bool canMove = false): base(anchor, size, getTextureRegion(card.Content.Texture))
     {
@@ -39,7 +50,13 @@ public class CardImage: Image
             {
                 PositionOffset = new Vector2(5, 0)
             });
-            AddChild(new Paragraph(Anchor.BottomRight, 25, paragraph => creatureCard.Damage.ToString()));    
+            AddChild(new Paragraph(Anchor.BottomRight, 25, paragraph => creatureCard.Damage.ToString()));
+
+            creatureCard.Damaged += () =>
+            {
+                var animation = new HurtCardAnimation(this);
+                Game1.Instance.Animations.Add(animation);
+            };
         }
 
         var highlightFrame = Game1.Instance.Content.Load<Texture2D>("images/card_frame_moused");
@@ -47,6 +64,7 @@ public class CardImage: Image
         _highlight.IsHidden = true;
         OnMouseEnter = element => _highlight.IsHidden = false;
         OnMouseExit = element => _highlight.IsHidden = true;
+        
     }
 
     private void MouseOnMouseDragStart(object sender, MouseEventArgs e)
