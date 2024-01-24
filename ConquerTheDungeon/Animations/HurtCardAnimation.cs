@@ -17,23 +17,26 @@ public class HurtCardAnimation: AnimationActor
     public override void Start()
     {
         const float duration = .2f;
+        
         _cardImage.ColorProp = Color.White;
         Game1.Instance.Animations.Tweener
             .TweenTo(_cardImage, x => x.ColorProp, 
                 Color.Red, duration)
             .Easing(EasingFunctions.Linear)
-            .AutoReverse()
             .OnEnd(_ => Finish());
+        
         Game1.Instance.Animations.Tweener
             .TweenTo(_cardImage, x => x.PositionOffset,
                 _cardImage.PositionOffset - new Vector2(0, 10), duration)
             .Easing(EasingFunctions.Linear)
             .AutoReverse();
+        
         base.Start();
     }
 
     public override void Finish()
     {
+        _cardImage.ColorProp = Color.White;
         base.Finish();
     }
 }
