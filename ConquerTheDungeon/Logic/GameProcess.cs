@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using ConquerTheDungeon.Logic.Cards;
 using MLEM.Extensions;
 
 namespace ConquerTheDungeon.Logic;
@@ -23,10 +25,28 @@ public class GameProcess
 
     public void Turn()
     {
+        _dirtyCards.Clear();
+        TurnNext();
+    }
+
+    private HashSet<Card> _dirtyCards = new ();
+
+    private void TurnNext()
+    {
         foreach (var card in EnemyBoard.Creatures)
-            card.Turn(EnemyBoard.Creatures, PlayerBoard.Creatures);
+            if (!_dirtyCards.Contains(card))
+            {
+                card.Turn(EnemyBoard.Creatures, PlayerBoard.Creatures, TurnNext);
+                _dirtyCards.Add(card);
+                return;
+            }
         
         foreach (var card in PlayerBoard.Creatures)
-            card.Turn(PlayerBoard.Creatures, EnemyBoard.Creatures);
+            if (!_dirtyCards.Contains(card)) 
+            {
+                card.Turn(PlayerBoard.Creatures, EnemyBoard.Creatures, TurnNext);
+                _dirtyCards.Add(card);
+                return;
+            }
     }
 }

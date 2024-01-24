@@ -33,11 +33,15 @@ public class CreatureCard : Card
         return new CreatureCard(Content);
     }
 
-    public void Turn(ObservableCollection<CreatureCard> ownBoard, ObservableCollection<CreatureCard> againstBoard)
+    public void Turn(ObservableCollection<CreatureCard> ownBoard, ObservableCollection<CreatureCard> againstBoard, Action postTurn)
     {
         var creature = Random.Shared.GetRandomEntry(againstBoard);
         var animation = new StrikeCardAnimation(this, creature);
-        animation.Finished += x => creature.Hurt(Damage);
+        animation.Finished += x =>
+        {
+            creature.Hurt(Damage);
+            postTurn();
+        };
         Game1.Instance.Animations.Add(animation);
     }
 
