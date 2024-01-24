@@ -6,6 +6,7 @@ using ConquerTheDungeon.Logic.Cards.Spells;
 using ConquerTheDungeon.Ui;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MonoGame.Extended.Input.InputListeners;
@@ -43,8 +44,23 @@ public class FightScreen: Screen
         Game1.Instance.UiSystem.Add("button", turnButton);
         
         Game1.Instance.Mouse.MouseDragEnd += MouseOnMouseDragEnd;
+        Game1.Instance.Keys.KeyPressed += KeysOnKeyPressed;
 
         _gameProcess.Initialization();
+    }
+
+    public override void Dispose()
+    {
+        Game1.Instance.Mouse.MouseDragEnd -= MouseOnMouseDragEnd;
+        Game1.Instance.Keys.KeyPressed -= KeysOnKeyPressed;
+        
+        base.Dispose();
+    }
+
+    private void KeysOnKeyPressed(object sender, KeyboardEventArgs e)
+    {
+        if (e.Key is Keys.Enter or Keys.Space)
+            _gameProcess.Turn();
     }
 
     private Element GetPlayerDesk()
@@ -125,13 +141,6 @@ public class FightScreen: Screen
         
         _playerBoard.CardsCanBeMoused = false;
         _enemyBoard.CardsCanBeMoused = false;
-    }
-
-    public override void Dispose()
-    {
-        Game1.Instance.Mouse.MouseDragEnd -= MouseOnMouseDragEnd;
-        
-        base.Dispose();
     }
 
     public override void LoadContent()

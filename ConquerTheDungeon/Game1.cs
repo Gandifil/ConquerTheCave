@@ -24,6 +24,8 @@ public class Game1 : Game
 
     public MouseListener Mouse { get; private set; }
 
+    public KeyboardListener Keys { get; private set; }
+
     public UiSystem UiSystem { get; private set; }
 
     public AnimationManager Animations { get; private set; }
@@ -44,7 +46,7 @@ public class Game1 : Game
         Graphics.ApplyChanges();
         Components.Add(UiSystem = new UiSystem(this, new UiStyle()));
 
-        Components.Add(new InputListenerComponent(this, Mouse = new MouseListener()));
+        Components.Add(new InputListenerComponent(this, Mouse = new MouseListener(), Keys = new KeyboardListener()));
 
         Components.Add(ScreenManager = new ScreenManager());
 
@@ -85,7 +87,7 @@ public class Game1 : Game
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-            Keyboard.GetState().IsKeyDown(Keys.Escape))
+            Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
             Exit();
 
         // TODO: Add your update logic here
