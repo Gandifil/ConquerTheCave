@@ -1,3 +1,4 @@
+using System;
 using ConquerTheDungeon.Logic.Cards;
 using ConquerTheDungeon.Ui;
 using Microsoft.Xna.Framework;
@@ -28,7 +29,7 @@ public class HurtCardAnimation: AnimationActor
         Game1.Instance.Animations.Tweener
             .TweenTo(_cardImage, x => x.PositionOffset,
                 _cardImage.PositionOffset - new Vector2(0, 10), duration)
-            .Easing(EasingFunctions.Linear)
+            .Easing(x => MathF.Sin(x * MathF.PI * 2) * (1 - x))
             .AutoReverse();
         
         base.Start();
