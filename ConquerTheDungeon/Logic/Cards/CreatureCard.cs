@@ -11,7 +11,7 @@ public class CreatureCard : Card
     private readonly List<ModCard> _mods = new();
     public int Life {get; private set; }
 
-    public int Damage => Content.Damage;
+    public int Damage { get; set; }
 
     public event EventHandler<ModCard> OnModAdded;
 
@@ -20,6 +20,7 @@ public class CreatureCard : Card
     public CreatureCard(CardContent content) : base(content)
     {
         Life = content.Life;
+        Damage = Content.Damage;
     }
 
     public void Add(ModCard mod)
