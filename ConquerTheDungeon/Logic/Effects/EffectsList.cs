@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ConquerTheDungeon.Logic.Effects.CardEffects;
 
 namespace ConquerTheDungeon.Logic.Effects;
 
@@ -41,4 +42,9 @@ public class EffectsList<T>: Effect<T>, IEnumerable<Effect<T>>
     IEnumerator<Effect<T>> IEnumerable<Effect<T>>.GetEnumerator() => _effects.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => _effects.GetEnumerator();
+
+    public void Add(Effect<T> effect)
+    {
+        _effects.Add(effect);
+    }
 }
