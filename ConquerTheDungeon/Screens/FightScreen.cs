@@ -14,16 +14,15 @@ using MonoGame.Extended.Screens;
 
 namespace ConquerTheDungeon.Screens;
 
-public class FightScreen: Screen
+public class FightScreen: BackgroundScreen
 {
-    private Texture2D _background;
     private CardsPanel _playerBoard;
     private CardsPanel _enemyBoard;
 
     private readonly Player _player;
     private readonly GameProcess _gameProcess;
 
-    public FightScreen(Player player)
+    public FightScreen(Player player): base("darkest_cave_01")
     {
         _player = player;
         _gameProcess = new GameProcess(player);
@@ -141,21 +140,5 @@ public class FightScreen: Screen
         
         _playerBoard.CardsCanBeMoused = false;
         _enemyBoard.CardsCanBeMoused = false;
-    }
-
-    public override void LoadContent()
-    {
-        base.LoadContent();
-
-        _background = Game1.Instance.Content.Load<Texture2D>("images/backgrounds/darkest_cave_01");
-    }
-
-    public override void Update(GameTime gameTime)
-    {
-    }
-
-    public override void Draw(GameTime gameTime)
-    {
-        Game1.Instance.SpriteBatch.Draw(_background, new Rectangle(0, 0, Game1.Instance.Graphics.PreferredBackBufferWidth, Game1.Instance.Graphics.PreferredBackBufferHeight), Color.White);
     }
 }
