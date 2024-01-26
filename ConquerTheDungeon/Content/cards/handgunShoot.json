@@ -1,4 +1,5 @@
 {
+  "Name": "Выстрел из револьвера",
   "Type": "HandgunShoot",
   "Texture": "handgun01",
   "TargetSide": "Enemy",

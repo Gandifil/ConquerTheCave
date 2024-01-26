@@ -1,9 +1,16 @@
+using System.Text.Json.Serialization;
 using ConquerTheDungeon.Logic.Cards.Spells;
 
 namespace ConquerTheDungeon.Logic.Cards;
 
 public class CardContent
 {
+    // it's for logic
+    [JsonIgnore]
+    public string Id { get; set; }
+
+    public string Name { get; set; }
+    
     public string Type { get; set; }
     
     public string Texture { get; set; }

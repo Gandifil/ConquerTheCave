@@ -10,6 +10,7 @@ public static class CardLoader
     public static Card Get(string assetName)
     {
         var content = Game1.Instance.Content.Load<CardContent>($"cards/{assetName}.json", new JsonContentLoader());
+        content.Id = assetName;
         var typeName = content.Type;
         var type = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
