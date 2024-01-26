@@ -41,14 +41,14 @@ public class PerksScreen: BackgroundScreen
         }
 
         panel.AddChild(new Paragraph(Anchor.BottomLeft, 0.2f, 
-            paragraph => "Очки перков: " +_player.PerkPoints.ToString(), TextAlignment.Center)
+            paragraph => "Очки перков: " + _player.PerkPoints, TextAlignment.Center)
         {
             TextScale = new StyleProp<float>(3f),
             TextColor = Color.White,
         });
     }
 
-    private void SetupPerk(int x, int y, Perk perk)
+    private void SetupPerk(int x, int y, PerksMap.PerkHandler perk)
     {
         var image = new PerkImage(perk);
         _groups[x, y].AddChild(image);

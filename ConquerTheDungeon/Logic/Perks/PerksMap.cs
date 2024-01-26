@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using ConquerTheDungeon.Logic.Effects;
 using ConquerTheDungeon.Logic.Effects.PlayerEffects;
 
@@ -6,19 +8,40 @@ namespace ConquerTheDungeon.Logic.Perks;
 
 public class PerksMap
 {
+    public class PerkHandler
+    {
+        public readonly Perk Perk;
+
+        public PerkHandler(Perk perk)
+        {
+            Perk = perk;
+        }
+
+        public bool IsEnabled { get; private set; }
+
+        public event Action<Perk> Enabled;
+
+        public void Enable()
+        {
+            Enabled?.Invoke(Perk);
+            IsEnabled = true;
+        }
+    }
+    
     public class PerksLine
     {
-        public readonly List<Perk> LeftPerks;
+        public readonly List<PerkHandler> LeftPerks;
 
-        public readonly List<Perk> RightPerks;
+        public readonly List<PerkHandler> RightPerks;
 
-        public readonly Perk Base;
+        public readonly PerkHandler Base;
 
         public PerksLine(List<Perk> leftPerks, Perk @base, List<Perk> rightPerks)
         {
-            LeftPerks = leftPerks;
-            Base = @base;
-            RightPerks = rightPerks;
+            LeftPerks = leftPerks.Select(x => new PerkHandler(x)).ToList();
+            Base = new PerkHandler(@base);
+            RightPerks = rightPerks.Select(x => new PerkHandler(x)).ToList();
+            Base.Enable();
         }
     }
 
