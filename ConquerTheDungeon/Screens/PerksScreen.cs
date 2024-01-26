@@ -2,7 +2,10 @@ using ConquerTheDungeon.Logic;
 using ConquerTheDungeon.Logic.Perks;
 using ConquerTheDungeon.Ui;
 using Microsoft.Xna.Framework;
+using MLEM.Formatting;
+using MLEM.Ui;
 using MLEM.Ui.Elements;
+using MLEM.Ui.Style;
 
 namespace ConquerTheDungeon.Screens;
 
@@ -36,6 +39,13 @@ public class PerksScreen: BackgroundScreen
             for (int j = 0; j < perkLine.RightPerks.Count; j++)
                 SetupPerk(N + 1 + j, i, perkLine.RightPerks[j]);
         }
+
+        panel.AddChild(new Paragraph(Anchor.BottomLeft, 0.2f, 
+            paragraph => "Очки перков: " +_player.PerkPoints.ToString(), TextAlignment.Center)
+        {
+            TextScale = new StyleProp<float>(3f),
+            TextColor = Color.White,
+        });
     }
 
     private void SetupPerk(int x, int y, Perk perk)

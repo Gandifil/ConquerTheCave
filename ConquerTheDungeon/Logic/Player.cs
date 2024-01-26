@@ -15,6 +15,8 @@ public class Player
         Cards = LoadStartCards();
     }
 
+    public int PerkPoints { get; set; } = 1;
+
     private Card[] LoadStartCards()
     {
         var cards = new string[] { "warrior", "mage", "armor", "handgunShoot"};
