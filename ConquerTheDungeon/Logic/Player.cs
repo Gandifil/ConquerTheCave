@@ -1,11 +1,14 @@
 using System.Linq;
 using ConquerTheDungeon.Logic.Cards;
+using ConquerTheDungeon.Logic.Perks;
 
 namespace ConquerTheDungeon.Logic;
 
 public class Player
 {
     public Card[] Cards { get; private set; }
+
+    public readonly PerksMap PerksMap = new PerksMap();
 
     public Player()
     {
