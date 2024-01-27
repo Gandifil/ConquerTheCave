@@ -28,10 +28,11 @@ public class Player
 
     public void TeachPerk(PerkHandler handler)
     {
-        if (PerkPoints > 0 && !handler.IsEnabled)
+        if (PerkPoints > 0 && !handler.IsEnabled && handler.CanEnable)
         {
             handler.Enable();
             handler.Perk.Effects.Commit(this);
+            PerksMap.ResetCanEnabled();
             PerkPoints--;
         }
     }

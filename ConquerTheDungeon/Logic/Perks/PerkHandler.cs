@@ -19,6 +19,8 @@ public class PerkHandler
 
     public bool IsEnabled { get; private set; }
 
+    public bool CanEnable { get; set; }
+
     public event Action<Perk> Enabled;
 
     public void Enable()

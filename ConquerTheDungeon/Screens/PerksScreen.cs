@@ -34,7 +34,7 @@ public class PerksScreen: BackgroundScreen
         {
             var perkLine = _player.PerksMap.Lines[i];
             for (int j = 0; j < perkLine.LeftPerks.Count; j++)
-                SetupPerk(j + N - perkLine.LeftPerks.Count, i, perkLine.LeftPerks[j]);
+                SetupPerk(N - 1 - j, i, perkLine.LeftPerks[j]);
             SetupPerk(N, i, perkLine.Base);
             for (int j = 0; j < perkLine.RightPerks.Count; j++)
                 SetupPerk(N + 1 + j, i, perkLine.RightPerks[j]);
