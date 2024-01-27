@@ -46,6 +46,11 @@ public class PerksScreen: BackgroundScreen
             TextScale = new StyleProp<float>(3f),
             TextColor = Color.White,
         });
+
+        panel.AddChild(new Button(Anchor.BottomRight, new Vector2(0.2f, 0.1f), "Продолжить")
+        {
+            OnPressed = element => Game1.Instance.ScreenManager.LoadScreen(new FightScreen(_player))
+        });
     }
 
     private void SetupPerk(int x, int y, PerkHandler perk)
