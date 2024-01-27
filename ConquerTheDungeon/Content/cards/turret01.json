@@ -1,0 +1,7 @@
+{
+  "Name": "Пулеметная туррель",
+  "Type": "CreatureCard",
+  "Texture": "turret01",
+  "Life": 5,
+  "Damage": 3
+}
