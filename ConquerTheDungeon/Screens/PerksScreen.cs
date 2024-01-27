@@ -56,7 +56,6 @@ public class PerksScreen: BackgroundScreen
         if (x != N) // it's a perk which player can apply
         {
             image.CanBePressed = true;
-            image.CanBeMoused = true;
             image.OnPressed += element => _player.TeachPerk(perk);
         }
     }

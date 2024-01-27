@@ -9,6 +9,8 @@ namespace ConquerTheDungeon.Ui;
 
 public class PerkImage: Image
 {
+    private readonly Image _image;
+    
     public PerkImage(PerkHandler perk) 
         : base(Anchor.Center, new Vector2(0.9f), LoadTexture(perk.Perk.ImageName))
     {
@@ -16,6 +18,14 @@ public class PerkImage: Image
 
         perk.Enabled += PerkOnEnabled;
         OnRemovedFromUi += element => perk.Enabled -= PerkOnEnabled;
+
+        var texture = Game1.Instance.Content.Load<Texture2D>("images/selector_frame");
+        AddChild(_image = new Image(Anchor.Center, Vector2.One, new TextureRegion(texture)));
+        _image.IsHidden = true;
+
+        CanBeMoused = true;
+        OnMouseEnter = element => _image.IsHidden = false;
+        OnMouseExit = element => _image.IsHidden = true;
     }
 
     private void PerkOnEnabled(Perk obj)
