@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using ConquerTheDungeon.Logic.Cards;
 using ConquerTheDungeon.Logic.Perks;
@@ -23,5 +24,15 @@ public class Player
         return cards.Select(x =>
             CardLoader.Get(x))
             .ToArray();
+    }
+
+    public void TeachPerk(PerkHandler handler)
+    {
+        if (PerkPoints > 0 && !handler.IsEnabled)
+        {
+            handler.Enable();
+            handler.Perk.Effects.Commit(this);
+            PerkPoints--;
+        }
     }
 }

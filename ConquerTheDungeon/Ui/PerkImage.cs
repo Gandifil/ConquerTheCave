@@ -9,7 +9,7 @@ namespace ConquerTheDungeon.Ui;
 
 public class PerkImage: Image
 {
-    public PerkImage(PerksMap.PerkHandler perk) 
+    public PerkImage(PerkHandler perk) 
         : base(Anchor.Center, new Vector2(0.9f), LoadTexture(perk.Perk.ImageName))
     {
         SetEnableState(perk.IsEnabled);

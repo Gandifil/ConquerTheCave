@@ -48,10 +48,17 @@ public class PerksScreen: BackgroundScreen
         });
     }
 
-    private void SetupPerk(int x, int y, PerksMap.PerkHandler perk)
+    private void SetupPerk(int x, int y, PerkHandler perk)
     {
         var image = new PerkImage(perk);
         _groups[x, y].AddChild(image);
+
+        if (x != N) // it's a perk which player can apply
+        {
+            image.CanBePressed = true;
+            image.CanBeMoused = true;
+            image.OnPressed += element => _player.TeachPerk(perk);
+        }
     }
 
     public override void Dispose()

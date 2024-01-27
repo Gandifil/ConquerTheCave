@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ConquerTheDungeon.Logic.Effects;
@@ -8,26 +7,6 @@ namespace ConquerTheDungeon.Logic.Perks;
 
 public class PerksMap
 {
-    public class PerkHandler
-    {
-        public readonly Perk Perk;
-
-        public PerkHandler(Perk perk)
-        {
-            Perk = perk;
-        }
-
-        public bool IsEnabled { get; private set; }
-
-        public event Action<Perk> Enabled;
-
-        public void Enable()
-        {
-            Enabled?.Invoke(Perk);
-            IsEnabled = true;
-        }
-    }
-    
     public class PerksLine
     {
         public readonly List<PerkHandler> LeftPerks;
@@ -36,11 +15,11 @@ public class PerksMap
 
         public readonly PerkHandler Base;
 
-        public PerksLine(List<Perk> leftPerks, Perk @base, List<Perk> rightPerks)
+        public PerksLine(int index, List<Perk> leftPerks, Perk @base, List<Perk> rightPerks)
         {
-            LeftPerks = leftPerks.Select(x => new PerkHandler(x)).ToList();
-            Base = new PerkHandler(@base);
-            RightPerks = rightPerks.Select(x => new PerkHandler(x)).ToList();
+            LeftPerks = leftPerks.Select((x, i) => new PerkHandler(x, index, -i)).ToList();
+            Base = new PerkHandler(@base, index, 0);
+            RightPerks = rightPerks.Select((x, i) => new PerkHandler(x, index, i)).ToList();
             Base.Enable();
         }
     }
@@ -58,7 +37,7 @@ public class PerksMap
         };
         Lines = new PerksLine[]
         {
-            new PerksLine(new List<Perk>{perk, perk}, perk, new List<Perk>())
+            new PerksLine(0,new List<Perk>{perk, perk}, perk, new List<Perk>())
         };
     }
 }
