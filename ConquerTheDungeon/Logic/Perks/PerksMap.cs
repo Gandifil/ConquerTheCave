@@ -57,7 +57,7 @@ public class PerksMap
     {
         for (int i = 0; i < perks.Count; i++)
         {
-            perks[i].CanEnable = (i > 0 ? perks[i - 1].IsEnabled : true) && perks[i].IsEnabled;
+            perks[i].CanEnable.Value = (i > 0 ? perks[i - 1].IsEnabled : true) && !perks[i].IsEnabled;
         }
     }
 }

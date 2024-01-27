@@ -1,4 +1,5 @@
 using System;
+using ConquerTheDungeon.Utils;
 
 namespace ConquerTheDungeon.Logic.Perks;
 
@@ -19,7 +20,7 @@ public class PerkHandler
 
     public bool IsEnabled { get; private set; }
 
-    public bool CanEnable { get; set; }
+    public readonly ObservedParameter<bool> CanEnable = new();
 
     public event Action<Perk> Enabled;
 
