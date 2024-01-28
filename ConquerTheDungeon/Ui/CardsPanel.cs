@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using ConquerTheDungeon.Logic;
 using ConquerTheDungeon.Logic.Cards;
 using Microsoft.Xna.Framework;
@@ -37,19 +38,19 @@ public class CardsPanel: Group
         {
             SetHeightBasedOnAspect = true,
         };
-        card.OnModAdded += (sender, modCard) =>
-        {
-            cardImage.AddChild(new CardImage(modCard, Anchor.Center, new Vector2(0.3f, 0f))
-            {
-                SetHeightBasedOnAspect = true,
-                PositionOffset = new Vector2(0, 100f),
-            });
-        };
         var group = new Group(Anchor.AutoInline, new Vector2(.1f, 0));
         group.AddChild(cardImage);
         AddChild(group);
         _groups[card] = group;
         card.Died += CardOnDied;
+    }
+    /// <summary>
+    /// Need use this, because this element include groups, which include CardImages.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerable<CardImage> GetCardImages()
+    {
+        return Children.SelectMany(x => x.GetChildren().OfType<CardImage>());
     }
 
     private void CardOnDied(CreatureCard obj)

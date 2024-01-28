@@ -17,6 +17,8 @@ public class DragAndDrop: CardImage
         Game1.Instance.Mouse.MouseDragEnd += MouseOnMouseDragEnd;
         OnRemovedFromUi += element => { Game1.Instance.Mouse.MouseDragEnd -= MouseOnMouseDragEnd; };
         SyncWithMouse();
+
+        CanBeMoused = false;
     }
 
     private void MouseOnMouseDragEnd(object sender, MouseEventArgs e)

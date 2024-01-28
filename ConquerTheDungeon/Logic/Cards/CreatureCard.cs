@@ -10,14 +10,15 @@ namespace ConquerTheDungeon.Logic.Cards;
 
 public class CreatureCard : Card
 {
-    private readonly List<ModCard> _mods = new();
+    private readonly ObservableCollection<ModCard> _mods = new();
+    
     public int Life {get; private set; }
 
     public int Damage { get; set; }
 
-    public event EventHandler<ModCard> OnModAdded;
-
     public IReadOnlyList<ModCard> Mods => _mods;
+
+    public IObservableCollection<ModCard> ModsEvents => _mods;
 
     public CreatureCard(CardContent content) : base(content)
     {
@@ -33,8 +34,6 @@ public class CreatureCard : Card
             _mods.Add(mod.Clone());
         else
             existingMod.Append(mod);
-        
-        OnModAdded?.Invoke(this, mod);
     }
 
     public CreatureCard Clone()

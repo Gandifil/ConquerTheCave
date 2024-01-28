@@ -122,20 +122,18 @@ public class FightScreen: BackgroundScreen
                 break;
             case ModCard m:
                 if (_playerBoard.DisplayArea.Contains(e.Position.ToVector2()))
-                    foreach (var element in _playerBoard.GetChildren())
+                    foreach (var element in _playerBoard.GetCardImages())
                         if (element.IsMouseOver)
-                            if (element is CardImage elementCardImage)
-                            {
-                                var creature = elementCardImage.Card as CreatureCard;
-                                creature.Add(m);
-                            }
+                        {
+                            var creature = element.Card as CreatureCard;
+                            creature.Add(m);
+                        }
                 break;
             
             case SpellCard spellCard:
-                foreach (var element in GetBoard(spellCard).GetChildren())
+                foreach (var element in GetBoard(spellCard).GetCardImages())
                     if (element.IsMouseOver)
-                        if (element is CardImage elementCardImage)
-                            spellCard.Use(elementCardImage.Card as CreatureCard);
+                        spellCard.Use(element.Card as CreatureCard);
                 break;
         }
         
