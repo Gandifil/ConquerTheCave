@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ConquerTheDungeon.Animations;
+using ConquerTheDungeon.Logic.ModCards;
 using MLEM.Extensions;
 using MonoGame.Extended.Collections;
 
@@ -25,7 +27,13 @@ public class CreatureCard : Card
 
     public void Add(ModCard mod)
     {
-        _mods.Add(mod);
+        var existingMod = _mods.FirstOrDefault(x => x.GetType() == mod.GetType());
+        
+        if (existingMod is null)
+            _mods.Add(mod.Clone());
+        else
+            existingMod.Append(mod);
+        
         OnModAdded?.Invoke(this, mod);
     }
 

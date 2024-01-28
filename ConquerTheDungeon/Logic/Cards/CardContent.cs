@@ -22,4 +22,6 @@ public class CardContent
     public TargetKind TargetKind { get; set; }
     
     public TargetSide TargetSide { get; set; }
+    
+    public int BaseValue { get; set; }
 }

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using ConquerTheDungeon.Logic;
 using ConquerTheDungeon.Logic.Cards;
 using ConquerTheDungeon.Logic.Cards.Spells;
+using ConquerTheDungeon.Logic.ModCards;
 using ConquerTheDungeon.Ui;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

@@ -1,0 +1,6 @@
+{
+  "Name": "Энергетический щит",
+  "Type": "EnergyShield",
+  "Texture": "energy_shield",
+  "BaseValue": 3
+}
