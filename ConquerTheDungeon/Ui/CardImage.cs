@@ -65,12 +65,25 @@ public class CardImage: Image
             creatureCard.ModsEvents.ItemRemoved += ModsEventsOnItemRemoved;
         }
 
+        if (Card is ModCard modCard )
+        {
+            if (modCard is CounterModCard counterModCard)
+            {
+                if (counterModCard.Value != 0)
+                    AddChild(new Paragraph(Anchor.BottomCenter, 50, paragraph => counterModCard.Value.ToString())
+                    {
+                        PositionOffset = new Vector2(0, -50f),
+                        TextColor = new StyleProp<Color>(Microsoft.Xna.Framework.Color.LightGreen),
+                        TextScaleMultiplier = 2f
+                    });
+            }
+        }
+
         var highlightFrame = Game1.Instance.Content.Load<Texture2D>("images/card_frame_moused");
         AddChild(_highlight = new Image(Anchor.Center, new Vector2(1f, 1f), new TextureRegion(highlightFrame)));
         _highlight.IsHidden = true;
         OnMouseEnter = element => _highlight.IsHidden = false;
         OnMouseExit = element => _highlight.IsHidden = true;
-        
     }
 
     private void ModsEventsOnItemAdded(object sender, ItemEventArgs<ModCard> e)
@@ -94,12 +107,12 @@ public class CardImage: Image
     private void UpdateModCardsPosition()
     {
         var y = DisplayArea.Height * .75f;
-        var x = DisplayArea.Width * .5f;
+        var x = DisplayArea.Width * .3f;
         
         var cardImageChildren = Children.OfType<CardImage>().ToList();
 
         for (int i = 0; i < cardImageChildren.Count; i++)
-            cardImageChildren[i].PositionOffset = new Vector2(i * x - cardImageChildren.Count * x / 2, y);
+            cardImageChildren[i].PositionOffset = new Vector2(i * x - (cardImageChildren.Count - 1) * x / 2, y);
     }
 
     private void MouseOnMouseDragStart(object sender, MouseEventArgs e)
