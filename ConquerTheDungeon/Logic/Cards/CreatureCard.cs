@@ -59,6 +59,8 @@ public class CreatureCard : Card
 
     public void Hurt(int value)
     {
+        foreach (var mod in _mods.ToList())
+            value = mod.PreDamage(value);
         Life = Math.Max(0, Life - value);
         Damaged?.Invoke();
         if (Life == 0)
