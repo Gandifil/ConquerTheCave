@@ -14,8 +14,7 @@ public abstract class CounterModCard: ModCard
     {
         Value = value;
     }
-
-
+    
     public override bool CanBeAddedTo(CreatureCard creature) => true;
 
     public override void Append(ModCard card)

@@ -29,9 +29,13 @@ public class CreatureCard : Card
     public void Add(ModCard mod)
     {
         var existingMod = _mods.FirstOrDefault(x => x.GetType() == mod.GetType());
-        
+
         if (existingMod is null)
-            _mods.Add(mod.Clone());
+        {
+            var copy = mod.Clone();
+            copy.Canceled += card => _mods.Remove(card);
+            _mods.Add(copy);
+        }
         else
             existingMod.Append(mod);
     }
