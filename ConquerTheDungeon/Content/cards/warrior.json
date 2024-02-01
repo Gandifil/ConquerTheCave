@@ -1,5 +1,6 @@
 {
   "Name": "Друэлла",
+  "IsOneOff": true,
   "Type": "CreatureCard",
   "Texture": "warrior",
   "Life": 20,
