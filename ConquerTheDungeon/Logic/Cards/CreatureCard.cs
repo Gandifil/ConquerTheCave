@@ -32,17 +32,12 @@ public class CreatureCard : Card
 
         if (existingMod is null)
         {
-            var copy = mod.Clone();
+            var copy = mod.GetInitializedClone();
             copy.Canceled += card => _mods.Remove(card);
             _mods.Add(copy);
         }
         else
             existingMod.Append(mod);
-    }
-
-    public CreatureCard Clone()
-    {
-        return new CreatureCard(Content);
     }
 
     public void Turn(ObservableCollection<CreatureCard> ownBoard, ObservableCollection<CreatureCard> againstBoard, Action postTurn)

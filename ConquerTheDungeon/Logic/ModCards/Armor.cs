@@ -12,5 +12,5 @@ public class Armor: CounterModCard
     {
     }
 
-    public override ModCard Clone() => new Armor(Content, Content.BaseValue);
+    public override ModCard GetInitializedClone() => new Armor(Content, Content.BaseValue);
 }

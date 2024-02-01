@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
+using MonoGame.Extended.Collections;
 using MonoGame.Extended.Input.InputListeners;
 using MonoGame.Extended.Screens;
 
@@ -19,6 +20,7 @@ public class FightScreen: BackgroundScreen
 {
     private CardsPanel _playerBoard;
     private CardsPanel _enemyBoard;
+    private PlayerCardsPanel _playerCardsPanel;
 
     private readonly Player _player;
     private readonly GameProcess _gameProcess;
@@ -38,7 +40,8 @@ public class FightScreen: BackgroundScreen
             new CardsPanel(_gameProcess.EnemyBoard, Anchor.TopCenter, new Vector2(1, .4f)));
         Game1.Instance.UiSystem.Add("player_board", _playerBoard = 
             new CardsPanel(_gameProcess.PlayerBoard, Anchor.Center, new Vector2(1, .4f)));
-        Game1.Instance.UiSystem.Add("playerDesk", GetPlayerDesk());
+        Game1.Instance.UiSystem.Add("playerDesk", _playerCardsPanel = new PlayerCardsPanel(_gameProcess, Anchor.BottomCenter, new Vector2(.95f, .2f)));
+        _playerCardsPanel.OnMouseDrag += CardOnMouseDrag;
         var turnButton = new Button(Anchor.BottomRight, new Vector2(0.1f, 0.1f), "Turn");
         turnButton.OnPressed = element => _gameProcess.Turn();
         Game1.Instance.UiSystem.Add("button", turnButton);
@@ -63,26 +66,10 @@ public class FightScreen: BackgroundScreen
             _gameProcess.Turn();
     }
 
-    private Element GetPlayerDesk()
-    {
-        var root = new Panel(Anchor.BottomCenter, new Vector2(.95f, .2f), Vector2.Zero);
-        foreach (var card in _player.Cards)
-        {
-            var cardImage = new CardImage(card, Anchor.AutoInline, new Vector2(0.05f, 0f), true)
-            {
-                SetHeightBasedOnAspect = true
-            };
-            cardImage.OnMouseDrag += CardOnMouseDrag;
-            root.AddChild(cardImage);
-        }
-        
-        return root;
-    }
-
     private void CardOnMouseDrag(object sender, MouseEventArgs e)
     {
         var cardImage = sender as CardImage;
-        Game1.Instance.UiSystem.Add(nameof(DragAndDrop), new DragAndDrop(cardImage.Card, 
+        Game1.Instance.UiSystem.Add(nameof(DragAndDrop), new DragAndDrop(cardImage.Card.Clone() as Card, 
             cardImage.DisplayArea.Size, 
             e.Position.ToVector2() - cardImage.DisplayArea.Location));
         if (cardImage.Card is ModCard)
@@ -109,16 +96,21 @@ public class FightScreen: BackgroundScreen
 
     private void MouseOnMouseDragEnd(object sender, MouseEventArgs e)
     {
-        var ui = Game1.Instance.UiSystem;
-        var root = ui.Get(nameof(DragAndDrop));
+        var root = Game1.Instance.UiSystem.Get(nameof(DragAndDrop));
         if (root is null) return;
-        var cardImage = root.Element as DragAndDrop;
+        
+        var dragAndDrop = root.Element as DragAndDrop;
+        if (dragAndDrop is null) return;
 
-        switch (cardImage.Card)
+        var usingCard = dragAndDrop.Card;
+        switch (usingCard)
         {
-            case CreatureCard c:
+            case CreatureCard creature:
                 if (_playerBoard.DisplayArea.Contains(e.Position.ToVector2()))
-                    _gameProcess.PlayerBoard.Creatures.Add(c.Clone());
+                {
+                    _gameProcess.PlayerBoard.Creatures.Add(creature.Clone() as CreatureCard);
+                    _gameProcess.Use(usingCard);
+                }
                 break;
             case ModCard m:
                 if (_playerBoard.DisplayArea.Contains(e.Position.ToVector2()))
@@ -127,13 +119,17 @@ public class FightScreen: BackgroundScreen
                         {
                             var creature = element.Card as CreatureCard;
                             creature.Add(m);
+                            _gameProcess.Use(usingCard);
                         }
                 break;
             
             case SpellCard spellCard:
                 foreach (var element in GetBoard(spellCard).GetCardImages())
                     if (element.IsMouseOver)
+                    {
                         spellCard.Use(element.Card as CreatureCard);
+                        _gameProcess.Use(usingCard);
+                    }
                 break;
         }
         

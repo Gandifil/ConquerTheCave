@@ -15,7 +15,7 @@ public abstract class ModCard: Card
 
     public abstract void Append(ModCard card);
 
-    public abstract ModCard Clone();
+    public abstract ModCard GetInitializedClone();
 
     #region Logic
 

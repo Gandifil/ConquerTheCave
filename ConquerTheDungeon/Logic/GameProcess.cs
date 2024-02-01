@@ -28,7 +28,7 @@ public class GameProcess
     public void Initialization()
     {
         foreach (var card in new FightScenario().GetInitialCards())
-            EnemyBoard.Creatures.Add(card.Clone());
+            EnemyBoard.Creatures.Add(card.Clone() as CreatureCard);
     }
 
     public void Use(Card card)

@@ -38,7 +38,10 @@ public class CardImage: Image
     public CardImage(Card card, Anchor anchor, Vector2 size, bool canMove = false): base(anchor, size, getTextureRegion(card.Content.Texture))
     {
         Card = card;
-        Card.UiElement = this;
+        if (Card.UiElement is null)
+            Card.UiElement = this;
+        else
+            throw new ApplicationException(nameof(Card.UiElement) + " must be null");
         _frame = Game1.Instance.Content.Load<Texture2D>("images/" + (Card is CreatureCard ? "creature_card_frame" : "card_frame") );
         AddChild(new Image(Anchor.Center, new Vector2(1f, 1f), new TextureRegion(_frame)));
         if (canMove)

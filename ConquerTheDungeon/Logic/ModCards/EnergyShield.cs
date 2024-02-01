@@ -12,5 +12,5 @@ public class EnergyShield: CounterModCard
     {
     }
     
-    public override ModCard Clone() => new EnergyShield(Content, Content.BaseValue);
+    public override ModCard GetInitializedClone() => new EnergyShield(Content, Content.BaseValue);
 }
