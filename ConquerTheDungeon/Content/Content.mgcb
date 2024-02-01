@@ -90,3 +90,79 @@
 /processor:TextureProcessor
 /build:images/cards/handgun01.png
 
+#begin images/backgrounds/campfire_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/backgrounds/campfire_01.png
+
+#begin images/perks/book.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/perks/book.png
+
+#begin images/perks/chest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/perks/chest.png
+
+#begin images/perks/double_strike.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/perks/double_strike.png
+
+#begin images/perks/energy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/perks/energy.png
+
+#begin images/perks/fire.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/perks/fire.png
+
+#begin images/perks/moon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/perks/moon.png
+
+#begin images/perks/plate.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/perks/plate.png
+
+#begin images/perks/water.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/perks/water.png
+
+#begin images/selector_frame.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/selector_frame.png
+
+#begin cards/turret01.json
+/copy:cards/turret01.json
+
+#begin images/cards/turret01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/turret01.png
+
+#begin images/cards/turret02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/turret02.png
+
+#begin images/cards/turret03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/turret03.png
+
+#begin cards/energy_shield.json
+/copy:cards/energy_shield.json
+
+#begin images/cards/energy_shield.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/energy_shield.png
+
