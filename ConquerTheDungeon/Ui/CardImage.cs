@@ -47,7 +47,11 @@ public class CardImage: Image
         if (canMove)
         {
             Game1.Instance.Mouse.MouseDragStart += MouseOnMouseDragStart;
-            OnRemovedFromUi += element => { Game1.Instance.Mouse.MouseDragStart -= MouseOnMouseDragStart; };
+            OnRemovedFromUi += element =>
+            {
+                Game1.Instance.Mouse.MouseDragStart -= MouseOnMouseDragStart;
+                Card.UiElement = null;
+            };
         }
 
         if (Card is CreatureCard creatureCard)
