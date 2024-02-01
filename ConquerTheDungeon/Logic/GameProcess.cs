@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ConquerTheDungeon.Logic.Cards;
+using ConquerTheDungeon.Logic.Cards.Spells;
+using ConquerTheDungeon.Logic.ModCards;
 using MLEM.Extensions;
 using MonoGame.Extended.Collections;
 
@@ -33,8 +35,10 @@ public class GameProcess
 
     public void Use(Card card)
     {
+        Type[] types = { typeof(CreatureCard), typeof(ModCard), typeof(SpellCard) };
+        var usedType = types.First(x => x.IsInstanceOfType(card));
         foreach (var item in _currentCards.ToList())
-            if (item.GetType().IsAssignableTo(card.GetType()))
+            if (usedType.IsInstanceOfType(item))
                 _currentCards.Remove(item);
     }
 
