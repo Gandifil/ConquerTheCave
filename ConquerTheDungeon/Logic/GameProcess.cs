@@ -24,7 +24,7 @@ public class GameProcess
     {
         _player = player;
         _backCards = player.Cards.ToList();
-        _currentCards = new(_backCards);
+        _currentCards = new(player.Cards.ToList());
     }
 
     public void Initialization()
@@ -40,6 +40,8 @@ public class GameProcess
         foreach (var item in _currentCards.ToList())
             if (usedType.IsInstanceOfType(item))
                 _currentCards.Remove(item);
+        if (!_currentCards.Any())
+            Turn();
     }
 
     public void Turn()
