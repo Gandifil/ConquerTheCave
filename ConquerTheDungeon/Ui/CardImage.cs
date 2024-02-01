@@ -91,6 +91,12 @@ public class CardImage: Image
         _highlight.IsHidden = true;
         OnMouseEnter = element => _highlight.IsHidden = false;
         OnMouseExit = element => _highlight.IsHidden = true;
+        
+        var _tooltip = new Tooltip(x => Card.Description, this);
+        _tooltip.MouseOffset = new Vector2(32, -64);
+        _tooltip.ParagraphWidth = new StyleProp<float>(300);
+        
+        CanBeMoused = true;
     }
 
     private void ModsEventsOnItemAdded(object sender, ItemEventArgs<ModCard> e)

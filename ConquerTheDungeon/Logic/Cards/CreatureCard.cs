@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using ConquerTheDungeon.Animations;
 using ConquerTheDungeon.Logic.ModCards;
 using MLEM.Extensions;
@@ -60,6 +61,15 @@ public class CreatureCard : Card
         Damaged?.Invoke();
         if (Life == 0)
             Die();
+    }
+
+    protected override void FillDescription(StringBuilder builder)
+    {
+        builder.Append("Attack: ");
+        builder.AppendLine(Damage.ToString());
+        
+        builder.Append("Life: ");
+        builder.AppendLine(Life.ToString());
     }
 
     public event Action<CreatureCard> Died;
