@@ -23,6 +23,12 @@ public abstract class ModCard: Card
 
     #endregion
 
+    #region Logic
+
+    public virtual int PreDamage(int value) => value;
+
+    #endregion
+
     public void Cancel()
     {
         Canceled?.Invoke(this);
