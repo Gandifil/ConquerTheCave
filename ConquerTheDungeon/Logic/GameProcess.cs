@@ -40,6 +40,8 @@ public class GameProcess
         foreach (var item in _currentCards.ToList())
             if (usedType.IsInstanceOfType(item))
                 _currentCards.Remove(item);
+        if (card.Content.IsOneOff)
+            _backCards.Remove(_backCards.First(x => x.Content == card.Content));
         if (!_currentCards.Any())
             Turn();
     }

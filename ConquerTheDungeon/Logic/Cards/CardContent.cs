@@ -18,6 +18,8 @@ public class CardContent
     public int Damage { get; set; }
 
     public int  Life { get; set; }
+
+    public bool IsOneOff { get; set; }
     
     public TargetKind TargetKind { get; set; }
     

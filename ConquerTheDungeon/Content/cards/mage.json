@@ -1,5 +1,6 @@
 {
   "Name": "Элис",
+  "IsOneOff": true,
   "Type": "CreatureCard",
   "Texture": "mage",
   "Life": 10,
