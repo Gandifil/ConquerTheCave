@@ -19,6 +19,7 @@ public class GameProcess
     
     public readonly Board PlayerBoard = new();
     public readonly Board EnemyBoard = new();
+    private int turnIndex;
     public IObservableCollection<Card> CurrentCardsEvents => _currentCards;
     public IReadOnlyCollection<Card> CurrentCards => _currentCards;
 
@@ -32,7 +33,12 @@ public class GameProcess
 
     public void Initialization()
     {
-        foreach (var card in _fightScenario.GetCards(0))
+        EnemyUseCards(_fightScenario.GetCards(0));
+    }
+
+    private void EnemyUseCards(CreatureCard[] cards)
+    {
+        foreach (var card in cards)
             EnemyBoard.Creatures.Add(card.Clone() as CreatureCard);
     }
 
@@ -51,6 +57,8 @@ public class GameProcess
 
     public void Turn()
     {
+        turnIndex++;
+        EnemyUseCards(_fightScenario.GetCards(turnIndex));
         _dirtyCards.Clear();
         TurnNext();
     }
