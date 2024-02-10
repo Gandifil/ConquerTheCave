@@ -11,6 +11,7 @@ namespace ConquerTheDungeon.Ui;
 public class CardsPanel: Group
 {
     private readonly Dictionary<CreatureCard, Group> _groups = new();
+    
     public CardsPanel(Board board, Anchor anchor, Vector2 size) : base(anchor, size, false)
     {
         board.Creatures.ItemAdded += (sender, args) => Add(args.Item);
@@ -21,8 +22,9 @@ public class CardsPanel: Group
     {
         set
         {
-            foreach (var creatureCard in _groups.Keys)
-                creatureCard.UiElement.CanBeMoused = value;
+            foreach (var creature in _groups.Keys)
+                if (creature.UiElement is CardImage cardImage)
+                    cardImage.CanBeChoosed.Value = value;
         }
     }
 
@@ -42,7 +44,6 @@ public class CardsPanel: Group
         group.AddChild(cardImage);
         AddChild(group);
         _groups[card] = group;
-        card.Died += CardOnDied;
     }
     /// <summary>
     /// Need use this, because this element include groups, which include CardImages.
@@ -56,5 +57,6 @@ public class CardsPanel: Group
     private void CardOnDied(CreatureCard obj)
     {
         RemoveChild(_groups[obj]);
+        _groups.Remove(obj);
     }
 }

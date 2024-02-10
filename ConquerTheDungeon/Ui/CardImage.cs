@@ -4,6 +4,7 @@ using ConquerTheDungeon.Animations;
 using ConquerTheDungeon.Logic;
 using ConquerTheDungeon.Logic.Cards;
 using ConquerTheDungeon.Logic.ModCards;
+using ConquerTheDungeon.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Textures;
@@ -20,7 +21,9 @@ public class CardImage: Image
 {
     public static Size2 Size = new Size2(350, 500);
 
-    public event EventHandler<MouseEventArgs> OnMouseDrag; 
+    public event EventHandler<MouseEventArgs> OnMouseDrag;
+
+    public readonly ObservedParameter<bool> CanBeChoosed = new();
 
     public readonly Card Card;
     private readonly Texture2D _frame;
@@ -89,8 +92,9 @@ public class CardImage: Image
         var highlightFrame = Game1.Instance.Content.Load<Texture2D>("images/card_frame_moused");
         AddChild(_highlight = new Image(Anchor.Center, new Vector2(1f, 1f), new TextureRegion(highlightFrame)));
         _highlight.IsHidden = true;
-        OnMouseEnter = element => _highlight.IsHidden = false;
-        OnMouseExit = element => _highlight.IsHidden = true;
+        OnMouseEnter = element => SetHighlightState(CanBeChoosed);
+        OnMouseExit = element => SetHighlightState(false);
+        CanBeChoosed.Changed += value => SetHighlightState(value && IsMouseOver);
         
         var _tooltip = new Tooltip(x => Card.Description, this);
         _tooltip.MouseOffset = new Vector2(32, -64);
@@ -134,6 +138,11 @@ public class CardImage: Image
         {
             OnMouseDrag?.Invoke(this, e);
         }
+    }
+
+    private void SetHighlightState(bool value)
+    {
+        _highlight.IsHidden = !value;
     }
     
     private static TextureRegion getTextureRegion(string contentTexture)
