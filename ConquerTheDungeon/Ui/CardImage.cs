@@ -7,6 +7,8 @@ using ConquerTheDungeon.Logic.ModCards;
 using ConquerTheDungeon.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MLEM.Formatting;
+using MLEM.Misc;
 using MLEM.Textures;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
@@ -59,11 +61,14 @@ public class CardImage: Image
 
         if (Card is CreatureCard creatureCard)
         {
-            AddChild(new Paragraph(Anchor.BottomLeft, 25, paragraph => creatureCard.Life.ToString())
+            AddChild(new Paragraph(Anchor.BottomLeft, 135, paragraph => creatureCard.Damage.ToString(), TextAlignment.Center, true)
             {
-                PositionOffset = new Vector2(5, 0)
+                Padding = new StyleProp<Padding>(new Padding(15, 5)),
             });
-            AddChild(new Paragraph(Anchor.BottomRight, 25, paragraph => creatureCard.Damage.ToString()));
+            AddChild(new Paragraph(Anchor.BottomRight, 135, paragraph => creatureCard.Life.ToString(), TextAlignment.Center, true)
+            {
+                Padding = new StyleProp<Padding>(new Padding(15, 5)),
+            });
 
             creatureCard.Damaged += () =>
             {
