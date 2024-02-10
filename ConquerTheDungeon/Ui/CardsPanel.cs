@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ConquerTheDungeon.Logic;
@@ -11,6 +12,8 @@ namespace ConquerTheDungeon.Ui;
 public class CardsPanel: Group
 {
     private readonly Dictionary<CreatureCard, Group> _groups = new();
+
+    public event Action<CardImage> CardImageAdding;
     
     public CardsPanel(Board board, Anchor anchor, Vector2 size) : base(anchor, size, false)
     {
@@ -40,11 +43,13 @@ public class CardsPanel: Group
         {
             SetHeightBasedOnAspect = true,
         };
+        CardImageAdding?.Invoke(cardImage);
         var group = new Group(Anchor.AutoInline, new Vector2(.1f, 0));
         group.AddChild(cardImage);
         AddChild(group);
         _groups[card] = group;
     }
+    
     /// <summary>
     /// Need use this, because this element include groups, which include CardImages.
     /// </summary>

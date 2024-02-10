@@ -39,6 +39,8 @@ public class FightScreen: BackgroundScreen
         
         Game1.Instance.UiSystem.Add("enemy_board", _enemyBoard = 
             new CardsPanel(_gameProcess.EnemyBoard, Anchor.TopCenter, new Vector2(1, .4f)));
+        _enemyBoard.CardImageAdding += cardImage => 
+            cardImage.PlayAnimation(new UiAnimation(.5f, (animation, element, percentage) => element.PositionOffset = new Vector2(0, -500 * (1 - percentage))));
         Game1.Instance.UiSystem.Add("player_board", _playerBoard = 
             new CardsPanel(_gameProcess.PlayerBoard, Anchor.Center, new Vector2(1, .4f)));
         Game1.Instance.UiSystem.Add("playerDesk", _playerCardsPanel = new PlayerCardsPanel(_gameProcess, Anchor.BottomCenter, new Vector2(.95f, .2f)));
