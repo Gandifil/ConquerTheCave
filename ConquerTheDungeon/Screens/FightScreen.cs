@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using ConquerTheDungeon.Logic;
+using ConquerTheDungeon.Logic.Ai;
 using ConquerTheDungeon.Logic.Cards;
 using ConquerTheDungeon.Logic.Cards.Spells;
 using ConquerTheDungeon.Logic.ModCards;
@@ -28,7 +29,7 @@ public class FightScreen: BackgroundScreen
     public FightScreen(Player player): base("darkest_cave_01")
     {
         _player = player;
-        _gameProcess = new GameProcess(player);
+        _gameProcess = new GameProcess(player, FightScenario.LoadFromContent("start"));
     }
 
     public override void Initialize()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConquerTheDungeon.Logic.Ai;
 using ConquerTheDungeon.Logic.Cards;
 using ConquerTheDungeon.Logic.Cards.Spells;
 using ConquerTheDungeon.Logic.ModCards;
@@ -12,6 +13,7 @@ namespace ConquerTheDungeon.Logic;
 public class GameProcess
 {
     private readonly Player _player;
+    private readonly FightScenario _fightScenario;
     private readonly List<Card> _backCards;
     private readonly ObservableCollection<Card> _currentCards;
     
@@ -20,16 +22,17 @@ public class GameProcess
     public IObservableCollection<Card> CurrentCardsEvents => _currentCards;
     public IReadOnlyCollection<Card> CurrentCards => _currentCards;
 
-    public GameProcess(Player player)
+    public GameProcess(Player player, FightScenario fightScenario)
     {
         _player = player;
+        _fightScenario = fightScenario;
         _backCards = player.Cards.ToList();
         _currentCards = new(player.Cards.ToList());
     }
 
     public void Initialization()
     {
-        foreach (var card in new FightScenario().GetInitialCards())
+        foreach (var card in _fightScenario.GetCards(0))
             EnemyBoard.Creatures.Add(card.Clone() as CreatureCard);
     }
 

@@ -166,3 +166,6 @@
 /processor:TextureProcessor
 /build:images/cards/energy_shield.png
 
+#begin fights/start.json
+/copy:fights/start.json
+
