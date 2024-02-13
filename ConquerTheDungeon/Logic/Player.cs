@@ -20,7 +20,7 @@ public class Player
 
     private Card[] LoadStartCards()
     {
-        var cards = new string[] { "warrior", "mage", "armor", "energy_shield", "handgunShoot", "turret01"};
+        var cards = new [] { "turret01", "energy_shield", "handgunShoot"};
         return cards.Select(x =>
             CardLoader.Get(x))
             .ToArray();
