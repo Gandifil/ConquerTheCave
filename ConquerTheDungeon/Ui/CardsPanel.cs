@@ -61,6 +61,11 @@ public class CardsPanel: Group
 
     private void CardOnDied(CreatureCard obj)
     {
+        (obj.UiElement as CardImage)?.PlayDieAnimation((obj1) => RemoveCard(obj));
+    }
+
+    private void RemoveCard(CreatureCard obj)
+    {
         RemoveChild(_groups[obj]);
         _groups.Remove(obj);
     }

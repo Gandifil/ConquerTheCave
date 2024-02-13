@@ -159,4 +159,17 @@ public class CardImage: Image
     {
         return new Vector2(width, -Size.Height / Size.Width);
     }
+
+    public void PlayDieAnimation(Action<Card> finished)
+    {
+        var texture = Game1.Instance.Content.Load<Texture2D>("images/cracks");
+        var image = new Image(Anchor.Center, new Vector2(1f, 1f), new TextureRegion(texture, Point.Zero, 
+            new Point((int)Size.Width, (int)Size.Height)));
+        AddChild(image);
+        var animation = new UiAnimation(0.6f, (animation, element, percentage) =>
+            image.Texture = new TextureRegion(texture, (int)(350 * Math.Floor(percentage * 5)), 0, (int)Size.Width,
+                (int)Size.Height));
+        animation.Finished += (uiAnimation, element) => finished(Card);
+        PlayAnimation(animation);
+    }
 }

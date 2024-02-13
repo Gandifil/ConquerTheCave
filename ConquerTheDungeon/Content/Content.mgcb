@@ -169,3 +169,8 @@
 #begin fights/start.json
 /copy:fights/start.json
 
+#begin images/cracks.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cracks.png
+
