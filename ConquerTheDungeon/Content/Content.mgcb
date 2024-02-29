@@ -174,3 +174,19 @@
 /processor:TextureProcessor
 /build:images/cracks.png
 
+#begin cards/slime01.json
+/copy:cards/slime01.json
+
+#begin cards/slime_mother01.json
+/copy:cards/slime_mother01.json
+
+#begin images/cards/slime01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/slime01.png
+
+#begin images/cards/slime_mother01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/cards/slime_mother01.png
+

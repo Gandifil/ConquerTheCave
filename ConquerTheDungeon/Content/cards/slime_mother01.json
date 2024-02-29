@@ -1,0 +1,7 @@
+{
+  "Name": "Мать слаймов",
+  "Type": "CreatureCard",
+  "Texture": "slime_mother01",
+  "Life": 5,
+  "Damage": 2
+}
