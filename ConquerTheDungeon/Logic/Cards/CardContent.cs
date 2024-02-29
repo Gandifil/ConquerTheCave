@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json.Serialization;
 using ConquerTheDungeon.Logic.Cards.Spells;
 
@@ -28,4 +29,6 @@ public class CardContent
     public TargetSide TargetSide { get; set; }
     
     public int BaseValue { get; set; }
+
+    public string[] Mods { get; set; } = Array.Empty<string>();
 }

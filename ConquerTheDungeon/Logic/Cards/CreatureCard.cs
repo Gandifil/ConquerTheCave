@@ -27,6 +27,12 @@ public class CreatureCard : Card
         Damage = Content.Damage;
     }
 
+    public void Initialization()
+    {
+        foreach (var initialMod in Content.Mods)
+            Add(CardLoader.Get(initialMod) as ModCard);
+    }
+
     public void Add(ModCard mod)
     {
         var existingMod = _mods.FirstOrDefault(x => x.GetType() == mod.GetType());

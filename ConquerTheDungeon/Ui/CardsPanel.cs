@@ -35,6 +35,7 @@ public class CardsPanel: Group
     {
         AddCardImage(card);
         AddChild(new Group(Anchor.AutoInline, new Vector2(10, 10)));
+        card.Initialization();
     }
 
     private void AddCardImage(CreatureCard card)
