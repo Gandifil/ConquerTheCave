@@ -65,6 +65,8 @@ public class CreatureCard : Card
 
     protected override void FillDescription(StringBuilder builder)
     {
+        base.FillDescription(builder);
+        
         builder.Append("Attack: ");
         builder.AppendLine(Damage.ToString());
         

@@ -1,7 +1,9 @@
 {
   "Name": "Выстрел из револьвера",
+  "Description": "Наносит {0:Damage} урона",
   "Type": "HandgunShoot",
   "Texture": "handgun01",
   "TargetSide": "Enemy",
-  "TargetKind": "OneCard"
+  "TargetKind": "OneCard",
+  "Damage": 2
 }
