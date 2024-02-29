@@ -38,11 +38,14 @@ public class FightScreen: BackgroundScreen
 
         
         Game1.Instance.UiSystem.Add("enemy_board", _enemyBoard = 
-            new CardsPanel(_gameProcess.EnemyBoard, Anchor.TopCenter, new Vector2(1, .4f)));
+            new CardsPanel(_gameProcess.EnemyBoard, Anchor.TopCenter, new Vector2(1, .3f)));
         _enemyBoard.CardImageAdding += cardImage => 
             cardImage.PlayAnimation(new UiAnimation(.5f, (animation, element, percentage) => element.PositionOffset = new Vector2(0, -500 * (1 - percentage))));
         Game1.Instance.UiSystem.Add("player_board", _playerBoard = 
-            new CardsPanel(_gameProcess.PlayerBoard, Anchor.Center, new Vector2(1, .4f)));
+            new CardsPanel(_gameProcess.PlayerBoard, Anchor.Center, new Vector2(1, .3f))
+            {
+                PositionOffset = new Vector2(0, Game1.Instance.UiSystem.Viewport.Height / 12)
+            });
         Game1.Instance.UiSystem.Add("playerDesk", _playerCardsPanel = new PlayerCardsPanel(_gameProcess, Anchor.BottomCenter, new Vector2(.95f, .2f)));
         _playerCardsPanel.OnMouseDrag += CardOnMouseDrag;
         var turnButton = new Button(Anchor.BottomRight, new Vector2(0.1f, 0.1f), "Turn");

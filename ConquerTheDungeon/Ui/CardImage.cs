@@ -110,10 +110,10 @@ public class CardImage: Image
 
     private void ModsEventsOnItemAdded(object sender, ItemEventArgs<ModCard> e)
     {
-        AddChild(new CardImage(e.Item, Anchor.Center, new Vector2(0.3f, 0f))
+        AddChild(new CardImage(e.Item, Anchor.Center, new Vector2(0.2f, 0f))
         {
             SetHeightBasedOnAspect = true,
-            PositionOffset = new Vector2(0, 100f),
+           //PositionOffset = new Vector2(0, 100f),
         });
         UpdateModCardsPosition();
     }
@@ -128,7 +128,7 @@ public class CardImage: Image
 
     private void UpdateModCardsPosition()
     {
-        var y = DisplayArea.Height * .75f;
+        var y = DisplayArea.Height * .65f;
         var x = DisplayArea.Width * .3f;
         
         var cardImageChildren = Children.OfType<CardImage>().ToList();
