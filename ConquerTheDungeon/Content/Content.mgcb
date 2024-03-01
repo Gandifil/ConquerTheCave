@@ -190,3 +190,6 @@
 /processor:TextureProcessor
 /build:images/cards/slime_mother01.png
 
+#begin cards/slime01_on_die.json
+/copy:cards/slime01_on_die.json
+

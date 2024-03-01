@@ -1,0 +1,6 @@
+{
+  "Name": "Порождение при смерти",
+  "Type": "CreatingCreaturesWhenDieMod",
+  "Description": "При смерти создает {0:Count} сущностей типа {0:Creature}",
+  "Texture": "slime01",
+}

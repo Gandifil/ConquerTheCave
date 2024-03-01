@@ -2,7 +2,7 @@
   "Name": "Мать слаймов",
   "Type": "CreatureCard",
   "Texture": "slime_mother01",
-  "Mods": ["armor"],
+  "Mods": ["armor", "slime01_on_die"],
   "Life": 5,
   "Damage": 2
 }
