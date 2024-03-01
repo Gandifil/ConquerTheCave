@@ -42,6 +42,7 @@ public class CreatureCard : Card
             var copy = mod.GetInitializedClone();
             copy.Canceled += card => _mods.Remove(card);
             _mods.Add(copy);
+            copy.InitializeWithParent(this);
         }
         else
             existingMod.Append(mod);

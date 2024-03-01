@@ -27,4 +27,8 @@ public abstract class ModCard: Card
     {
         Canceled?.Invoke(this);
     }
+
+    public virtual void InitializeWithParent(CreatureCard creatureCard)
+    {
+    }
 }

@@ -19,6 +19,7 @@ public class GameProcess
     
     public readonly Board PlayerBoard = new();
     public readonly Board EnemyBoard = new();
+    public static GameProcess Instance;
     private int turnIndex;
     public IObservableCollection<Card> CurrentCardsEvents => _currentCards;
     public IReadOnlyCollection<Card> CurrentCards => _currentCards;
@@ -29,6 +30,7 @@ public class GameProcess
         _fightScenario = fightScenario;
         _backCards = player.Cards.ToList();
         _currentCards = new(player.Cards.ToList());
+        Instance = this;
     }
 
     public void Initialization()
