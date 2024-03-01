@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using ConquerTheDungeon.Logic;
 using ConquerTheDungeon.Logic.Ai;
 using ConquerTheDungeon.Logic.Cards;
@@ -130,7 +131,7 @@ public class FightScreen: BackgroundScreen
                 break;
             
             case SpellCard spellCard:
-                foreach (var element in GetBoard(spellCard).GetCardImages())
+                foreach (var element in GetBoard(spellCard).GetCardImages().ToList())
                     if (element.IsMouseOver)
                     {
                         spellCard.Use(element.Card as CreatureCard);
