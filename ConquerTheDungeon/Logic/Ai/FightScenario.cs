@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using ConquerTheDungeon.Logic.Cards;
 using MonoGame.Extended.Content;
@@ -9,22 +10,26 @@ namespace ConquerTheDungeon.Logic.Ai;
 public class FightScenario
 {
     private readonly FightScenarioContent _content;
+    private readonly Queue<(int turn, string[] cards)> _queue = new();
 
     public FightScenario(FightScenarioContent content)
     {
         _content = content;
+        foreach (var pair in _content.Turns)
+            _queue.Enqueue((int.Parse(pair.Key), pair.Value));
     }
 
-    public CreatureCard[] GetCards(int turnIndex)
+    public CreatureCard[] GetCards(int turnIndex, Board playerBoard)
     {
-        if (_content.Turns.TryGetValue(turnIndex.ToString(), out var cards))
-        {
-            return cards.Select(x =>
-                    CardLoader.Get(x) as CreatureCard)
-                .ToArray();
-        }
+        return _queue.TryPeek(out var first) && (first.turn == turnIndex || !playerBoard.Creatures.Any())
+            ? Spawn()
+            : Array.Empty<CreatureCard>();
+    }
 
-        return Array.Empty<CreatureCard>();
+    private CreatureCard[] Spawn()
+    {
+        var action = _queue.Dequeue();
+        return action.cards.Select(x => CardLoader.Get(x) as CreatureCard).ToArray();
     }
 
     public static FightScenario LoadFromContent(string assetName) => 

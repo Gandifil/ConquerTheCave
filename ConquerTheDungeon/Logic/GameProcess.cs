@@ -24,6 +24,8 @@ public class GameProcess
     public IObservableCollection<Card> CurrentCardsEvents => _currentCards;
     public IReadOnlyCollection<Card> CurrentCards => _currentCards;
 
+    public event EventHandler<bool> Finished;
+
     public GameProcess(Player player, FightScenario fightScenario)
     {
         _player = player;
@@ -35,7 +37,7 @@ public class GameProcess
 
     public void Initialization()
     {
-        EnemyUseCards(_fightScenario.GetCards(0));
+        EnemyUseCards(_fightScenario.GetCards(0, EnemyBoard));
     }
 
     private void EnemyUseCards(CreatureCard[] cards)
@@ -60,7 +62,21 @@ public class GameProcess
     public void Turn()
     {
         turnIndex++;
-        EnemyUseCards(_fightScenario.GetCards(turnIndex));
+        EnemyUseCards(_fightScenario.GetCards(turnIndex, EnemyBoard));
+        
+        
+        if (!PlayerBoard.Creatures.Any())
+        {
+            Finished?.Invoke(this, false);
+            return;
+        }
+        
+        if (!EnemyBoard.Creatures.Any())
+        {
+            Finished?.Invoke(this, true);
+            return;
+        }
+        
         _dirtyCards.Clear();
         TurnNext();
     }

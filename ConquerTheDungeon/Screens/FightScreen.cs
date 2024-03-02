@@ -37,6 +37,7 @@ public class FightScreen: BackgroundScreen
     {
         base.Initialize();
 
+        _gameProcess.Finished += (sender, b) => Game1.Instance.Exit();
         
         Game1.Instance.UiSystem.Add("enemy_board", _enemyBoard = 
             new CardsPanel(_gameProcess.EnemyBoard, Anchor.TopCenter, new Vector2(1, .3f)));
