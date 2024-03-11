@@ -1,0 +1,7 @@
+{
+  "turns": {
+    "0" : ["slime01"],
+    "1" : ["slime_mother01"],
+    "3" : ["slime_mother01", "slime01"]
+  }
+}

@@ -193,3 +193,15 @@
 #begin cards/slime01_on_die.json
 /copy:cards/slime01_on_die.json
 
+#begin fights/map.json
+/copy:fights/map.json
+
+#begin fights/dogs.json
+/copy:fights/dogs.json
+
+#begin fights/first_slime_mother.json
+/copy:fights/first_slime_mother.json
+
+#begin fights/weak_slimes.json
+/copy:fights/weak_slimes.json
+

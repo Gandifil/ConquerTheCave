@@ -1,5 +1,6 @@
 ﻿using ConquerTheDungeon.Animations;
 using ConquerTheDungeon.Logic;
+using ConquerTheDungeon.Logic.Ai;
 using ConquerTheDungeon.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,6 +28,8 @@ public class Game1 : Game
     public KeyboardListener Keys { get; private set; }
 
     public UiSystem UiSystem { get; private set; }
+
+    public RoomMap RoomMap { get; private set; }
 
     public AnimationManager Animations { get; private set; }
 
@@ -81,7 +84,9 @@ public class Game1 : Game
         };
         UiSystem.Style = style;
         UiSystem.AutoScaleWithScreen = true;
-        ScreenManager.LoadScreen(new FightScreen(new Player()));
+
+        RoomMap = new RoomMap();
+        ScreenManager.LoadScreen(new FightScreen(new GameProcess(new Player(), FightScenario.LoadFromContent(RoomMap.GetNext()))));
     }
 
     protected override void Update(GameTime gameTime)

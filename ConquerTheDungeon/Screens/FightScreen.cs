@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Linq;
 using ConquerTheDungeon.Logic;
 using ConquerTheDungeon.Logic.Ai;
@@ -8,13 +7,10 @@ using ConquerTheDungeon.Logic.Cards.Spells;
 using ConquerTheDungeon.Logic.ModCards;
 using ConquerTheDungeon.Ui;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
-using MonoGame.Extended.Collections;
 using MonoGame.Extended.Input.InputListeners;
-using MonoGame.Extended.Screens;
 
 namespace ConquerTheDungeon.Screens;
 
@@ -24,20 +20,19 @@ public class FightScreen: BackgroundScreen
     private CardsPanel _enemyBoard;
     private PlayerCardsPanel _playerCardsPanel;
 
-    private readonly Player _player;
     private readonly GameProcess _gameProcess;
 
-    public FightScreen(Player player): base("darkest_cave_01")
+    public FightScreen(GameProcess gameProcess): base("darkest_cave_01")
     {
-        _player = player;
-        _gameProcess = new GameProcess(player, FightScenario.LoadFromContent("start"));
+        _gameProcess = gameProcess;
     }
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _gameProcess.Finished += (sender, b) => Game1.Instance.Exit();
+        _gameProcess.Finished += (sender, b) => 
+            Game1.Instance.ScreenManager.LoadScreen(new FightScreen(new GameProcess(_gameProcess.Player, FightScenario.LoadFromContent(Game1.Instance.RoomMap.GetNext()))));
         
         Game1.Instance.UiSystem.Add("enemy_board", _enemyBoard = 
             new CardsPanel(_gameProcess.EnemyBoard, Anchor.TopCenter, new Vector2(1, .3f)));
@@ -48,7 +43,7 @@ public class FightScreen: BackgroundScreen
             {
                 PositionOffset = new Vector2(0, Game1.Instance.UiSystem.Viewport.Height / 12)
             });
-        Game1.Instance.UiSystem.Add("playerDesk", _playerCardsPanel = new PlayerCardsPanel(_gameProcess, Anchor.BottomCenter, new Vector2(.95f, .2f)));
+        Game1.Instance.UiSystem.Add("player_desk", _playerCardsPanel = new PlayerCardsPanel(_gameProcess, Anchor.BottomCenter, new Vector2(.95f, .2f)));
         _playerCardsPanel.OnMouseDrag += CardOnMouseDrag;
         var turnButton = new Button(Anchor.BottomRight, new Vector2(0.1f, 0.1f), "Turn");
         turnButton.OnPressed = element => _gameProcess.Turn();
@@ -64,6 +59,12 @@ public class FightScreen: BackgroundScreen
     {
         Game1.Instance.Mouse.MouseDragEnd -= MouseOnMouseDragEnd;
         Game1.Instance.Keys.KeyPressed -= KeysOnKeyPressed;
+
+        var ui = Game1.Instance.UiSystem;
+        ui.Remove("enemy_board");
+        ui.Remove("player_board");
+        ui.Remove("player_desk");
+        ui.Remove("button");
         
         base.Dispose();
     }

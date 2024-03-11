@@ -49,7 +49,7 @@ public class PerksScreen: BackgroundScreen
 
         panel.AddChild(new Button(Anchor.BottomRight, new Vector2(0.2f, 0.1f), "Продолжить")
         {
-            OnPressed = element => Game1.Instance.ScreenManager.LoadScreen(new FightScreen(_player))
+            OnPressed = element => Game1.Instance.ScreenManager.LoadScreen(new FightScreen(null))
         });
     }
 

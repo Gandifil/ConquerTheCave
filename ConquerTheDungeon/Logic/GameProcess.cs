@@ -5,14 +5,13 @@ using ConquerTheDungeon.Logic.Ai;
 using ConquerTheDungeon.Logic.Cards;
 using ConquerTheDungeon.Logic.Cards.Spells;
 using ConquerTheDungeon.Logic.ModCards;
-using MLEM.Extensions;
 using MonoGame.Extended.Collections;
 
 namespace ConquerTheDungeon.Logic;
 
 public class GameProcess
 {
-    private readonly Player _player;
+    public readonly Player Player;
     private readonly FightScenario _fightScenario;
     private readonly List<Card> _backCards;
     private readonly ObservableCollection<Card> _currentCards;
@@ -28,7 +27,7 @@ public class GameProcess
 
     public GameProcess(Player player, FightScenario fightScenario)
     {
-        _player = player;
+        Player = player;
         _fightScenario = fightScenario;
         _backCards = player.Cards.ToList();
         _currentCards = new(player.Cards.ToList());
