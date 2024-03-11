@@ -50,7 +50,12 @@ public class CreatureCard : Card
 
     public void Turn(ObservableCollection<CreatureCard> ownBoard, ObservableCollection<CreatureCard> againstBoard, Action postTurn)
     {
-        var creature = Random.Shared.GetRandomEntry(againstBoard);
+        if (againstBoard.Any())
+            AttackEnemy(Random.Shared.GetRandomEntry(againstBoard), postTurn);
+    }
+
+    private void AttackEnemy(CreatureCard creature, Action postTurn)
+    {
         var animation = new StrikeCardAnimation(this, creature);
         animation.Finished += x =>
         {
